@@ -1,0 +1,97 @@
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { HelmetProvider } from "react-helmet-async";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+
+import "./globals.css";
+import About from "./app/about/Index.tsx";
+import Articles from "./app/articles/Index.tsx";
+import Diary from "./app/articles/diary/Index.tsx";
+import Max from "./app/articles/max/Index.tsx";
+import ClassImpression from "./app/class-impression/Index.tsx";
+import Index from "./app/index/Index.tsx";
+import Kdb from "./app/kdb/Index.tsx";
+import Nerene from "./app/nerene/Index.tsx";
+import Photos from "./app/photos/Index.tsx";
+import Tanka from "./app/tanka/Index.tsx";
+import Tasks from "./app/tasks/Index.tsx";
+import TsukubaMeshi from "./app/tsukuba-meshi/Index.tsx";
+import Errata2023 from "./app/tsukuba-meshi/errata2023/Index.tsx";
+import Ramen2023 from "./app/tsukuba-meshi/ramen2023/Index.tsx";
+import Ramen2024 from "./app/tsukuba-meshi/ramen2024/Index.tsx";
+import Restaurant2023 from "./app/tsukuba-meshi/restaurant2023/Index.tsx";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Index />,
+  },
+  {
+    path: "/about",
+    element: <About />,
+  },
+  {
+    path: "/articles",
+    element: <Articles />,
+  },
+  {
+    path: "/articles/diary",
+    element: <Diary />,
+  },
+  {
+    path: "/articles/max",
+    element: <Max />,
+  },
+  {
+    path: "/class-impression/:id",
+    element: <ClassImpression />,
+  },
+  {
+    path: "/kdb",
+    element: <Kdb />,
+  },
+  {
+    path: "/nerene",
+    element: <Nerene />,
+  },
+  {
+    path: "/photos/:id",
+    element: <Photos />,
+  },
+  {
+    path: "/tanka",
+    element: <Tanka />,
+  },
+  {
+    path: "/tasks",
+    element: <Tasks />,
+  },
+  {
+    path: "/tsukuba-meshi",
+    element: <TsukubaMeshi />,
+  },
+  {
+    path: "/tsukuba-meshi/errata2023",
+    element: <Errata2023 />,
+  },
+  {
+    path: "/tsukuba-meshi/ramen2023",
+    element: <Ramen2023 />,
+  },
+  {
+    path: "/tsukuba-meshi/ramen2024",
+    element: <Ramen2024 />,
+  },
+  {
+    path: "/tsukuba-meshi/restaurant2023",
+    element: <Restaurant2023 />,
+  },
+]);
+
+createRoot(document.getElementById("root")!).render(
+  <StrictMode>
+    <HelmetProvider>
+      <RouterProvider router={router} />
+    </HelmetProvider>
+  </StrictMode>,
+);
