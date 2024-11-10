@@ -97,15 +97,12 @@ const Main = ({ title, tasks }: MainProps) => {
   const filteredTasks = useMemo(
     () =>
       selectedTags.length > 0
-        ? tasks.filter((task) => {
-            const matchesState =
+        ? tasks.filter(
+            (task) =>
               (isSelectedTag("open") && task.state === "open") ||
-              (isSelectedTag("closed") && task.state === "closed");
-            if (!matchesState) {
-              return false;
-            }
-            return !isSelectedTag("public-only") || task.public;
-          })
+              (isSelectedTag("closed") && task.state === "closed") ||
+              (isSelectedTag("public-only") && task.public),
+          )
         : tasks,
     [tasks, selectedTags, isSelectedTag],
   );

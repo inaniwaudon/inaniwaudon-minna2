@@ -40,6 +40,20 @@ const Anchor = ({ href, children }: PageAnchorProps) => {
   if (href.startsWith("https://") || href.startsWith("http://")) {
     return <a href={href}>{content}</a>;
   }
+  if (
+    href.endsWith(".pdf") ||
+    href.endsWith(".png") ||
+    href.endsWith(".webp") ||
+    href.endsWith(".jpeg") ||
+    href.endsWith(".xml") ||
+    href.endsWith(".json")
+  ) {
+    return (
+      <Link to={href} reloadDocument>
+        {content}
+      </Link>
+    );
+  }
   return <Link to={href}>{content}</Link>;
 };
 

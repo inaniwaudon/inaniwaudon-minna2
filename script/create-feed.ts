@@ -1,8 +1,10 @@
+import fs from "node:fs";
 import { Feed, type FeedOptions } from "feed";
 
-import { articleLinks } from "@/app/articles/articles";
+import { articleLinks } from "../src/app/articles/articles";
 
 const directory = "feed";
+const path = "public/feed";
 
 export const feedOptions: FeedOptions = {
   title: "いなにわうどん.みんな",
@@ -23,7 +25,7 @@ export const feedOptions: FeedOptions = {
   },
 };
 
-export const getFeed = () => {
+export const main = () => {
   const feed = new Feed(feedOptions);
 
   for (const link of articleLinks) {
@@ -35,5 +37,13 @@ export const getFeed = () => {
       link: link.href,
     });
   }
-  return feed;
+
+  if (!fs.existsSync(`${path}/feed`)) {
+    fs.mkdirSync(`${path}/feed`, { recursive: true });
+  }
+  fs.writeFileSync(`${path}/feed/feed.xml`, feed.rss2());
+  fs.writeFileSync(`${path}/feed/atom.xml`, feed.atom1());
+  fs.writeFileSync(`${path}/feed/feed.json`, feed.json1());
 };
+
+main();
