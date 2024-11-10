@@ -1,6 +1,6 @@
 # inaniwaudon-minna
 
-Next.js で構築された個人サイトです。Cloudflare Pages（+ Edge Runtime）にデプロイします。
+Vite + React で構築された個人サイトです。GitHub Actions を用いてビルドした後、SPA として Cloudflare Pages にデプロイします。
 
 <https://いなにわうどん.みんな>
 
@@ -9,7 +9,7 @@ Next.js で構築された個人サイトです。Cloudflare Pages（+ Edge Runt
 ## Development
 
 ```bash
-yarn install
+yarn
 yarn run dev
 yarn run build
 ```
