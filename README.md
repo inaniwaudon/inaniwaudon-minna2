@@ -1,50 +1,47 @@
-# React + TypeScript + Vite
+# inaniwaudon-minna
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Next.js で構築された個人サイトです。Cloudflare Pages（+ Edge Runtime）にデプロイします。
 
-Currently, two official plugins are available:
+<https://いなにわうどん.みんな>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+バックエンド：[inaniwaudon-minna-backend](https://github.com/inaniwaudon/inaniwaudon-minna-backend)
 
-## Expanding the ESLint configuration
+## Development
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```bash
+yarn install
+yarn run dev
+yarn run build
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## 写真の更新
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+WebP 形式に圧縮した上で、Cloudflare R2 にアップロードし、メタデータを JSON ファイルとして管理します。
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+1. スクリプトを実行し、圧縮済み画像とメタデータを自動生成する。
+既にメタデータが存在する場合は、新たに変換した画像が追記される。
+ただし、同名の写真が存在する場合は、タイトル・場所以外の項目が上書きされる。
+
+    ```bash
+    npx ts-node script/compress-image.ts $key $input_dir
+    ```
+    
+    以下のファイルが生成される。
+
+    - `/src/app/photos/_const/$key.json`：JSON ファイル
+    - `$input_dir/dst/*.webp`：圧縮後画像
+    - `$input_dir/dst/thumbnail/*.webp`：サムネイル用画像
+
+2. 生成された画像ファイルを `/photo` に移動させる
+
+3. `/photo` を `s3://site-photos/photo/$key` と同期する
+
+    ```bash
+    aws s3 sync photos s3://site-photos/photo/$key --profile r2 --endpoint-url https://**.r2.cloudflarestorage.com --dryrun
+    ```
+
+4. JSON ファイルを編集してコミットする
+
+## チェックイン
+
+iOS 端末からチェックイン機能を利用するには、位置情報を許可したうえで「設定 → Safari → サイト越えトラッキングを防ぐ」を無効にする必要があります。
