@@ -22,10 +22,12 @@ jobs:
         id: cache-dependency
         with:
           path: "**/node_modules"
-          key: ${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+          key: ${{ runner.os }}-${{ hashFiles('yarn.lock') }}
       - name: Install dependencies
         if: ${{ steps.cache-dependency.outputs.cache-hit != 'true' }}
         run: yarn install --frozen-lockfile
+      - name: Create Feed
+        run: npx tsx script/create-feed.ts
       - name: Build
         run: yarn run build
       - name: Deploy to Cloudflare Pages

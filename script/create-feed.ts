@@ -38,12 +38,12 @@ export const main = () => {
     });
   }
 
-  if (!fs.existsSync(`${path}/feed`)) {
-    fs.mkdirSync(`${path}/feed`, { recursive: true });
+  if (!fs.existsSync(path)) {
+    fs.mkdirSync(path, { recursive: true });
   }
-  fs.writeFileSync(`${path}/feed/feed.xml`, feed.rss2());
-  fs.writeFileSync(`${path}/feed/atom.xml`, feed.atom1());
-  fs.writeFileSync(`${path}/feed/feed.json`, feed.json1());
+  fs.writeFileSync(`${path}/feed.xml`, feed.rss2());
+  fs.writeFileSync(`${path}/atom.xml`, feed.atom1());
+  fs.writeFileSync(`${path}/feed.json`, feed.json1());
 };
 
 main();
