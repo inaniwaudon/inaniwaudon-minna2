@@ -4,13 +4,20 @@ import { HelmetProvider } from "react-helmet-async";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import "./globals.css";
+import NotFound from "./app/404/Index.tsx";
 import About from "./app/about/Index.tsx";
 import Articles from "./app/articles/Index.tsx";
 import Diary from "./app/articles/diary/Index.tsx";
 import Max from "./app/articles/max/Index.tsx";
+import AuthCallback from "./app/auth/callback/Index.tsx";
+import AuthSignout from "./app/auth/signout/Index.tsx";
 import ClassImpression from "./app/class-impression/Index.tsx";
 import Index from "./app/index/Index.tsx";
 import Kdb from "./app/kdb/Index.tsx";
+import Locations from "./app/locations/Index.tsx";
+import LocationsId from "./app/locations/id/Index.tsx";
+import LocationsIdCheckin from "./app/locations/id/checkin/Index.tsx";
+import LocationsNew from "./app/locations/new/Index.tsx";
 import Nerene from "./app/nerene/Index.tsx";
 import Photos from "./app/photos/Index.tsx";
 import Tanka from "./app/tanka/Index.tsx";
@@ -43,12 +50,36 @@ const router = createBrowserRouter([
     element: <Max />,
   },
   {
+    path: "/auth/callback",
+    element: <AuthCallback />,
+  },
+  {
+    path: "/auth/signout",
+    element: <AuthSignout />,
+  },
+  {
     path: "/class-impression/:id",
     element: <ClassImpression />,
   },
   {
     path: "/kdb",
     element: <Kdb />,
+  },
+  {
+    path: "/Locations",
+    element: <Locations />,
+  },
+  {
+    path: "/Locations/:id",
+    element: <LocationsId />,
+  },
+  {
+    path: "/Locations/:id/checkin",
+    element: <LocationsIdCheckin />,
+  },
+  {
+    path: "/Locations/new",
+    element: <LocationsNew />,
   },
   {
     path: "/nerene",
@@ -85,6 +116,10 @@ const router = createBrowserRouter([
   {
     path: "/tsukuba-meshi/restaurant2023",
     element: <Restaurant2023 />,
+  },
+  {
+    path: "/*",
+    element: <NotFound />,
   },
 ]);
 
