@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { MdAdd } from "react-icons/md";
 import { useParams, useSearchParams } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -82,6 +82,7 @@ const Index = () => {
   const { id } = useParams();
   const [searchParams] = useSearchParams();
   const [transportation, setTransportation] = useState<Transportation>();
+  const [loading, setLoading] = useState(true);
 
   const checkinParam = searchParams.get("checkin");
 
@@ -90,20 +91,18 @@ const Index = () => {
   useEffect(() => {
     (async () => {
       const result = await fetchTransportation(id ?? "");
-      if (!result.success) {
-        return <NotFound />;
-      }
       if (result.success) {
         setTransportation(result.value);
       }
+      setLoading(false);
     })();
   }, [id]);
 
-  if (!id) {
-    return <NotFound />;
-  }
-  if (!transportation) {
+  if (loading) {
     return <div>Loading...</div>;
+  }
+  if (!id || !transportation) {
+    return <NotFound />;
   }
 
   const { title, date, checkins } = transportation;

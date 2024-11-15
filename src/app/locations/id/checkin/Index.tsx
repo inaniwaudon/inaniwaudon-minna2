@@ -4,6 +4,7 @@ import { useParams, useSearchParams } from "react-router-dom";
 
 import NotFound from "@/app/404/Index";
 import { fetchTransportation } from "../../lib/api";
+import { useRedirect } from "../../lib/useRedirect";
 import type { Checkin } from "../../lib/utils";
 import Content from "./Content";
 
@@ -12,6 +13,7 @@ const Page = () => {
   const [searchParams] = useSearchParams();
   const [initialCheckin, setInitialCheckin] = useState<Checkin>();
   const [loading, setLoading] = useState(true);
+  useRedirect();
 
   useEffect(() => {
     (async () => {
