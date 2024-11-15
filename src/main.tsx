@@ -16,6 +16,7 @@ import Index from "./app/index/Index.tsx";
 import Kdb from "./app/kdb/Index.tsx";
 import Locations from "./app/locations/Index.tsx";
 import LocationsId from "./app/locations/id/Index.tsx";
+import LocationsIdCheckin from "./app/locations/id/checkin/Index.tsx";
 import LocationsNew from "./app/locations/new/Index.tsx";
 import Nerene from "./app/nerene/Index.tsx";
 import Photos from "./app/photos/Index.tsx";
@@ -71,6 +72,10 @@ const router = createBrowserRouter([
   {
     path: "/Locations/:id",
     element: <LocationsId />,
+  },
+  {
+    path: "/Locations/:id/checkin",
+    element: <LocationsIdCheckin />,
   },
   {
     path: "/Locations/new",

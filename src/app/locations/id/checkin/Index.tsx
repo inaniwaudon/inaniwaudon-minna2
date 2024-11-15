@@ -1,31 +1,51 @@
 import PageWrapper from "@/components/common/PageWrapper";
+import { useEffect, useState } from "react";
+import { useParams, useSearchParams } from "react-router-dom";
+
+import NotFound from "@/app/404/Index";
 import { fetchTransportation } from "../../lib/api";
+import type { Checkin } from "../../lib/utils";
 import Content from "./Content";
 
-interface PageProps {
-  params: { id: string };
-  searchParams: { checkin?: string };
-}
+const Page = () => {
+  const { id } = useParams();
+  const [searchParams] = useSearchParams();
+  const [initialCheckin, setInitialCheckin] = useState<Checkin>();
+  const [loading, setLoading] = useState(true);
 
-const Page = async ({ params, searchParams }: PageProps) => {
-  // checkin が指定された場合はそのチェックイン情報を取得
-  const initialCheckin = await (async () => {
-    if (searchParams.checkin) {
-      const result = await fetchTransportation(params.id);
-      if (result.success) {
-        return result.value.checkins.find(
-          (checkin) => checkin.id === searchParams.checkin,
-        );
+  useEffect(() => {
+    (async () => {
+      if (!id) {
+        return;
       }
-    }
-    return undefined;
-  })();
+      // checkin が指定された場合はそのチェックイン情報を取得
+      if (searchParams.has("checkin")) {
+        const result = await fetchTransportation(id);
+        if (result.success) {
+          setInitialCheckin(
+            result.value.checkins.find(
+              (checkin) => checkin.id === searchParams.get("checkin"),
+            ),
+          );
+        }
+      }
+      setLoading(false);
+    })();
+  }, [id, searchParams]);
+
+  if (!id) {
+    return <NotFound />;
+  }
 
   return (
     <>
-      <PageWrapper title="新規登録" path="/locations/register">
-        <Content id={params.id} initialCheckin={initialCheckin} />
-      </PageWrapper>
+      {loading ? (
+        <div>Loading...</div>
+      ) : (
+        <PageWrapper title="新規登録" path="/locations/register">
+          <Content id={id} initialCheckin={initialCheckin} />
+        </PageWrapper>
+      )}
     </>
   );
 };

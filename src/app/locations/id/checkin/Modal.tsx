@@ -1,4 +1,4 @@
-import { styled } from "@linaria/react";
+import styled from "@emotion/styled";
 import { useCallback, useEffect, useState } from "react";
 import { MdPlace } from "react-icons/md";
 
@@ -171,7 +171,7 @@ const Modal = ({ displays, setFsqPlace, setDisplays }: ModalProps) => {
       {places ? (
         <List>
           {places.map((place) => (
-            <Item onClick={() => decide(place)}>
+            <Item key={place.fsq_id} onClick={() => decide(place)}>
               <PlaceIcon>
                 <MdPlace />
               </PlaceIcon>

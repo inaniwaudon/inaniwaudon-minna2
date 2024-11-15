@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
-import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { MdClose, MdPlace } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 import { v4 as uuidV4 } from "uuid";
 
 import { dateToInput } from "@/lib/utils";
@@ -88,7 +88,7 @@ interface ContentProps {
 }
 
 const Content = ({ id, initialCheckin }: ContentProps) => {
-  const router = useRouter();
+  const navigate = useNavigate();
 
   // 初期値の設定
   const [checkinId, _] = useState(initialCheckin?.id ?? uuidV4());
@@ -157,7 +157,7 @@ const Content = ({ id, initialCheckin }: ContentProps) => {
       return;
     }
     alert("チェックインしました");
-    router.push(`/locations/${id}?checkin=${checkinId}`);
+    navigate(`/locations/${id}?checkin=${checkinId}`);
   }, [
     id,
     checkinId,
@@ -166,7 +166,7 @@ const Content = ({ id, initialCheckin }: ContentProps) => {
     fsqPlace,
     description,
     photos,
-    router,
+    navigate,
   ]);
 
   const onClickDeleteButton = useCallback(async () => {
@@ -180,8 +180,8 @@ const Content = ({ id, initialCheckin }: ContentProps) => {
       return;
     }
     alert("チェックインを削除しました");
-    router.push(`/locations/${id}`);
-  }, [id, checkinId, router]);
+    navigate(`/locations/${id}`);
+  }, [id, checkinId, navigate]);
 
   useEffect(() => {
     if (fsqPlace) {
@@ -246,7 +246,7 @@ const Content = ({ id, initialCheckin }: ContentProps) => {
               チェックインを削除
             </DeleteButton>
           )}
-          <CancelButton onClick={() => router.push(`/locations/${id}`)}>
+          <CancelButton onClick={() => navigate(`/locations/${id}`)}>
             キャンセル
           </CancelButton>
         </ButtonList>

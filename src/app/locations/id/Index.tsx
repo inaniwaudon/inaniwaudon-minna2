@@ -90,7 +90,6 @@ const Index = () => {
   useEffect(() => {
     (async () => {
       const result = await fetchTransportation(id ?? "");
-      console.log(result);
       if (!result.success) {
         return <NotFound />;
       }
@@ -100,7 +99,10 @@ const Index = () => {
     })();
   }, [id]);
 
-  if (!id || !transportation) {
+  if (!id) {
+    return <NotFound />;
+  }
+  if (!transportation) {
     return <div>Loading...</div>;
   }
 
