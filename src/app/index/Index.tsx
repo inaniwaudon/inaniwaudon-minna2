@@ -189,7 +189,7 @@ const Main = () => {
               <Anchor href="/about">about</Anchor>
               <Divider />
               ソースコードを{" "}
-              <Anchor href="https://github.com/inaniwaudon/inaniwaudon-minna">
+              <Anchor href="https://github.com/inaniwaudon/inaniwaudon-minna2">
                 GitHub
               </Anchor>{" "}
               で公開しています
