@@ -37,6 +37,7 @@ const Title = styled.h1`
 
 const Content = styled.div`
   display: flex;
+  gap: 32px;
 `;
 
 const TimelineWrapper = styled.div<{ hidable: boolean }>`
@@ -120,10 +121,10 @@ const Index = () => {
         </Header>
       </HeaderAnchor>
       <Content>
-        <TimelineWrapper hidable={checkinParam !== undefined}>
+        <TimelineWrapper hidable={checkinParam !== null}>
           <Timeline id={id} checkins={checkins} />
         </TimelineWrapper>
-        <CheckinContentWrapper hidable={checkinParam === undefined}>
+        <CheckinContentWrapper hidable={checkinParam === null}>
           <CheckinContent id={id} checkin={checkins[selectedIndex]} />
         </CheckinContentWrapper>
       </Content>
