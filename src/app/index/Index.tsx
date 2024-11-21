@@ -80,8 +80,18 @@ const Main = () => {
               </CustomList>
             </section>
             <section>
-              <H2>移動記（β）</H2>
+              <H2>移動記</H2>
               <CustomList>
+                <li>
+                  <Anchor href="/locations/2024toyohashi">
+                    豊橋・高山旅行（2024/11/15–19）
+                  </Anchor>
+                </li>
+                <li>
+                  <Anchor href="/locations/2024sanriku">
+                    三陸旅行（2024/9/19–22）
+                  </Anchor>
+                </li>
                 <li>
                   <Anchor href="/locations/2024kyoto">
                     京都（2024/6/20–21）
