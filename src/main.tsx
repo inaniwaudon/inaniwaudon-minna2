@@ -20,6 +20,7 @@ import LocationsIdCheckin from "./app/locations/id/checkin/Index.tsx";
 import LocationsNew from "./app/locations/new/Index.tsx";
 import Nerene from "./app/nerene/Index.tsx";
 import Photos from "./app/photos/Index.tsx";
+import PhotosId from "./app/photos/id/Index.tsx";
 import Tanka from "./app/tanka/Index.tsx";
 import Tasks from "./app/tasks/Index.tsx";
 import TsukubaMeshi from "./app/tsukuba-meshi/Index.tsx";
@@ -86,8 +87,12 @@ const router = createBrowserRouter([
     element: <Nerene />,
   },
   {
-    path: "/photos/:id",
+    path: "/photos",
     element: <Photos />,
+  },
+  {
+    path: "/photos/:id",
+    element: <PhotosId />,
   },
   {
     path: "/tanka",
