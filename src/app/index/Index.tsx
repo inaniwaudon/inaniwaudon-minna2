@@ -7,6 +7,7 @@ import Anchor from "@/components/common/Anchor";
 import AnchorListItem from "@/components/common/AnchorListItem";
 import CustomList from "@/components/common/CustomList";
 import H2 from "@/components/common/H2";
+import Header from "@/components/common/Header";
 import { locations } from "../locations/locations";
 import LinkList from "./LinkList";
 import Nengajo from "./Nengajo";
@@ -123,7 +124,7 @@ const Main = () => {
                   <Anchor href="/articles/diary">日記</Anchor>
                 </li>
                 <li>
-                  授業感想
+                  <Anchor href="/class-impression">授業感想</Anchor>
                   <ListWrapper>
                     <CustomList>
                       <li>
@@ -195,6 +196,7 @@ const Main = () => {
           </TopContent>
         </Top>
       </Wrapper>
+      <Header />
     </>
   );
 };

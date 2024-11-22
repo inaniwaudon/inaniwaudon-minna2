@@ -1,7 +1,8 @@
 import styled from "@emotion/styled";
 import { Helmet } from "react-helmet-async";
 
-import Footer from "@/components/common/Footer";
+import Footer from "./Footer";
+import Header from "./Header";
 
 const Wrapper = styled.div`
   margin: 40px 56px;
@@ -33,6 +34,7 @@ const PageWrapper = ({
       <Wrapper>
         {children}
         <Footer title={title} path={path} />
+        <Header />
       </Wrapper>
     </>
   );
