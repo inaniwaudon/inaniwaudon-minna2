@@ -2,7 +2,7 @@ import type { PhotoData } from "@/lib/photo";
 
 const data: PhotoData = {
   title: "京都",
-  date: "",
+  date: "2024/6/20–21",
   key: "2024kyoto",
   photos: [
     {

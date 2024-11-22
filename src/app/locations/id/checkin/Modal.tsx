@@ -6,6 +6,7 @@ import { fetchPlaces } from "../../lib/api";
 import {
   type FoursquareOriginalPlace,
   type FoursquarePlace,
+  Loading,
   getCurrentPosition,
 } from "../../lib/utils";
 import ModalHeader from "./ModalHeader";
@@ -65,30 +66,6 @@ const Location = styled.div`
 const Details = styled.div`
   font-size: 12px;
   color: #999;
-`;
-
-const Loading = styled.div`
-  @keyframes ball-scale {
-    0% {
-      transform: scale(0.0);
-    }
-    100% {
-      transform: scale(1.0);
-      opacity: 0;
-    }
-  }
-
-  width: 60px;
-  height: 60px;
-  margin: auto;
-  border-radius: 50%;
-  background: hsla(40, 60%, 50%, 0.8);
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  animation: ball-scale 1s 0s ease-in-out infinite;
 `;
 
 const toSortPlaces = (places: FoursquareOriginalPlace[]) => {

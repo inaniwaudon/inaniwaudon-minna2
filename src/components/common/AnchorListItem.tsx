@@ -26,6 +26,7 @@ interface AnchorListItemProps {
   title: string;
   date?: string;
   description?: string;
+  dark?: boolean;
   content?: React.ReactNode;
 }
 
@@ -34,21 +35,26 @@ const AnchorListItem = ({
   title,
   date,
   description,
+  dark,
   content,
 }: AnchorListItemProps) => {
   return (
     <li>
-      <Header>
-        {date && <Time>{date}</Time>}
-        {description && (
-          <>
-            {" "}
-            – <Description>{description}</Description>
-          </>
-        )}
-      </Header>
+      {(date || description) && (
+        <Header>
+          {date && <Time>{date}</Time>}
+          {description && (
+            <>
+              {" "}
+              – <Description>{description}</Description>
+            </>
+          )}
+        </Header>
+      )}
       <div>
-        <Anchor href={href}>{title}</Anchor>
+        <Anchor href={href} dark={dark}>
+          {title}
+        </Anchor>
       </div>
       {content && <Content>{content}</Content>}
     </li>

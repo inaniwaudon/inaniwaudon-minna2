@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import NotFound from "@/app/404/Index";
 import PageWrapper from "@/components/common/PageWrapper";
 import { fetchTransportation } from "../lib/api";
-import type { Transportation } from "../lib/utils";
+import { Loading, type Transportation } from "../lib/utils";
 import CheckinContent from "./CheckinContent";
 import Timeline from "./Timeline";
 
@@ -100,7 +100,7 @@ const Index = () => {
   }, [id]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
   if (!id || !transportation) {
     return <NotFound />;
