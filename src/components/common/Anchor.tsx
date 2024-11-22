@@ -1,11 +1,15 @@
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
 
-import { linkColor, linkHoverColor, linkUnderlineColor } from "@/const/style";
+export const linkColor = "#666";
+export const linkDarkColor = "#ccc";
+export const linkUnderlineColor = "rgba(0, 0, 0, 0.2)";
+export const linkUnderlineDarkColor = "rgba(255, 255, 255, 0.2)";
+export const linkHoverColor = "rgba(223, 81, 168, 1.0)";
 
-const Content = styled.span`
+const Content = styled.span<{ dark: boolean }>`
   line-height: 1.3;
-  color: ${linkColor};
+  color: ${({ dark }) => (dark ? linkDarkColor : linkColor)};
   font-weight: 600;
   text-decoration: none;
   display: inline-block;
@@ -17,23 +21,24 @@ const Content = styled.span`
   }
 `;
 
-const Line = styled.span`
+const Line = styled.span<{ dark: boolean }>`
   height: 1px;
   margin-top: 2px;
-  background: ${linkUnderlineColor};
+  background: ${({ dark }) => (dark ? linkUnderlineDarkColor : linkUnderlineColor)};
   display: block;
 `;
 
 interface PageAnchorProps {
   href: string;
+  dark?: boolean;
   children: React.ReactNode;
 }
 
-const Anchor = ({ href, children }: PageAnchorProps) => {
+const Anchor = ({ href, dark = false, children }: PageAnchorProps) => {
   const content = (
-    <Content>
+    <Content dark={dark}>
       {children}
-      <Line />
+      <Line dark={dark} />
     </Content>
   );
 

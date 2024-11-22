@@ -12,6 +12,7 @@ import Max from "./app/articles/max/Index.tsx";
 import AuthCallback from "./app/auth/callback/Index.tsx";
 import AuthSignout from "./app/auth/signout/Index.tsx";
 import ClassImpression from "./app/class-impression/Index.tsx";
+import ClassImpressionId from "./app/class-impression/id/Index.tsx";
 import Index from "./app/index/Index.tsx";
 import Kdb from "./app/kdb/Index.tsx";
 import Locations from "./app/locations/Index.tsx";
@@ -20,6 +21,7 @@ import LocationsIdCheckin from "./app/locations/id/checkin/Index.tsx";
 import LocationsNew from "./app/locations/new/Index.tsx";
 import Nerene from "./app/nerene/Index.tsx";
 import Photos from "./app/photos/Index.tsx";
+import PhotosId from "./app/photos/id/Index.tsx";
 import Tanka from "./app/tanka/Index.tsx";
 import Tasks from "./app/tasks/Index.tsx";
 import TsukubaMeshi from "./app/tsukuba-meshi/Index.tsx";
@@ -58,27 +60,31 @@ const router = createBrowserRouter([
     element: <AuthSignout />,
   },
   {
-    path: "/class-impression/:id",
+    path: "/class-impression",
     element: <ClassImpression />,
+  },
+  {
+    path: "/class-impression/:id",
+    element: <ClassImpressionId />,
   },
   {
     path: "/kdb",
     element: <Kdb />,
   },
   {
-    path: "/Locations",
+    path: "/locations",
     element: <Locations />,
   },
   {
-    path: "/Locations/:id",
+    path: "/locations/:id",
     element: <LocationsId />,
   },
   {
-    path: "/Locations/:id/checkin",
+    path: "/locations/:id/checkin",
     element: <LocationsIdCheckin />,
   },
   {
-    path: "/Locations/new",
+    path: "/locations/new",
     element: <LocationsNew />,
   },
   {
@@ -86,8 +92,12 @@ const router = createBrowserRouter([
     element: <Nerene />,
   },
   {
-    path: "/photos/:id",
+    path: "/photos",
     element: <Photos />,
+  },
+  {
+    path: "/photos/:id",
+    element: <PhotosId />,
   },
   {
     path: "/tanka",

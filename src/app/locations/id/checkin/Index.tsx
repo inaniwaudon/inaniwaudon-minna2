@@ -5,7 +5,7 @@ import { useParams, useSearchParams } from "react-router-dom";
 import NotFound from "@/app/404/Index";
 import { fetchTransportation } from "../../lib/api";
 import { useRedirect } from "../../lib/useRedirect";
-import type { Checkin } from "../../lib/utils";
+import { type Checkin, Loading } from "../../lib/utils";
 import Content from "./Content";
 
 const Page = () => {
@@ -42,7 +42,7 @@ const Page = () => {
   return (
     <>
       {loading ? (
-        <div>Loading...</div>
+        <Loading />
       ) : (
         <PageWrapper title="新規登録" path="/locations/register">
           <Content id={id} initialCheckin={initialCheckin} />
