@@ -12,6 +12,7 @@ import Max from "./app/articles/max/Index.tsx";
 import AuthCallback from "./app/auth/callback/Index.tsx";
 import AuthSignout from "./app/auth/signout/Index.tsx";
 import ClassImpression from "./app/class-impression/Index.tsx";
+import ClassImpressionId from "./app/class-impression/id/Index.tsx";
 import Index from "./app/index/Index.tsx";
 import Kdb from "./app/kdb/Index.tsx";
 import Locations from "./app/locations/Index.tsx";
@@ -59,27 +60,31 @@ const router = createBrowserRouter([
     element: <AuthSignout />,
   },
   {
-    path: "/class-impression/:id",
+    path: "/class-impression",
     element: <ClassImpression />,
+  },
+  {
+    path: "/class-impression/:id",
+    element: <ClassImpressionId />,
   },
   {
     path: "/kdb",
     element: <Kdb />,
   },
   {
-    path: "/Locations",
+    path: "/locations",
     element: <Locations />,
   },
   {
-    path: "/Locations/:id",
+    path: "/locations/:id",
     element: <LocationsId />,
   },
   {
-    path: "/Locations/:id/checkin",
+    path: "/locations/:id/checkin",
     element: <LocationsIdCheckin />,
   },
   {
-    path: "/Locations/new",
+    path: "/locations/new",
     element: <LocationsNew />,
   },
   {
