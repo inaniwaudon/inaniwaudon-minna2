@@ -38,15 +38,17 @@ const AnchorListItem = ({
 }: AnchorListItemProps) => {
   return (
     <li>
-      <Header>
-        {date && <Time>{date}</Time>}
-        {description && (
-          <>
-            {" "}
-            – <Description>{description}</Description>
-          </>
-        )}
-      </Header>
+      {(date || description) && (
+        <Header>
+          {date && <Time>{date}</Time>}
+          {description && (
+            <>
+              {" "}
+              – <Description>{description}</Description>
+            </>
+          )}
+        </Header>
+      )}
       <div>
         <Anchor href={href}>{title}</Anchor>
       </div>

@@ -4,8 +4,10 @@ import { Helmet } from "react-helmet-async";
 import { photos } from "@/app/photos/const";
 import logo from "@/assets/index/logo2.svg";
 import Anchor from "@/components/common/Anchor";
+import AnchorListItem from "@/components/common/AnchorListItem";
 import CustomList from "@/components/common/CustomList";
 import H2 from "@/components/common/H2";
+import { locations } from "../locations/locations";
 import LinkList from "./LinkList";
 import Nengajo from "./Nengajo";
 import { creations } from "./const/creation";
@@ -68,45 +70,31 @@ const Main = () => {
             <section>
               <H2>写真</H2>
               <CustomList>
-                {photos.map(({ title, data }, index) => (
-                  <li key={index}>
-                    {data ? (
-                      <Anchor href={`/photos/${data.key}`}>{title}</Anchor>
-                    ) : (
+                {photos.map(({ title, data }, index) =>
+                  data ? (
+                    <AnchorListItem
+                      href={`/photos/${data.key}`}
+                      title={title}
+                      key={index}
+                    />
+                  ) : (
+                    <li key={title}>
                       <del>{title}</del>
-                    )}
-                  </li>
-                ))}
+                    </li>
+                  ),
+                )}
               </CustomList>
             </section>
             <section>
               <H2>移動記</H2>
               <CustomList>
-                <li>
-                  <Anchor href="/locations/2024toyohashi">
-                    豊橋・高山旅行（2024/11/15–19）
-                  </Anchor>
-                </li>
-                <li>
-                  <Anchor href="/locations/2024sanriku">
-                    三陸旅行（2024/9/19–22）
-                  </Anchor>
-                </li>
-                <li>
-                  <Anchor href="/locations/2024kyoto">
-                    京都（2024/6/20–21）
-                  </Anchor>
-                </li>
-                <li>
-                  <Anchor href="/locations/2024taiwan">
-                    台湾旅行（2024/2/24–29）
-                  </Anchor>
-                </li>
-                <li>
-                  <Anchor href="/locations/2024nagoya">
-                    岐阜・名古屋旅行（2024/1/26–29）
-                  </Anchor>
-                </li>
+                {locations.map(({ title, id }) => (
+                  <AnchorListItem
+                    href={`/locations/${id}`}
+                    title={title}
+                    key={id}
+                  />
+                ))}
               </CustomList>
             </section>
             <section>
