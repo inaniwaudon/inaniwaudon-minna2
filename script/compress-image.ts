@@ -4,7 +4,7 @@ import path from "node:path";
 import { ArgumentParser } from "argparse";
 import exif from "exif-reader";
 import { glob } from "glob";
-import natsort from "natsort";
+import natsort, { type OptionsType } from "natsort";
 import sharp, { type Sharp } from "sharp";
 
 import type { PhotoData, PhotoInfo } from "../src/lib/photo";
@@ -25,7 +25,15 @@ const FULL_QUALITY = 65;
 const THUMBNAIL_MAX_SIZE = 1000;
 const THUMBNAIL_QUALITY = 50;
 
-const getExistingData = (tsPath: string) => {
+type Natsort = (
+  options?: OptionsType,
+) => (a: string | number, b: string | number) => number;
+const naturalsort: Natsort = (natsort as any).default;
+
+/**
+ * 既存のデータが存在する場合はそのデータを読み込む
+ */
+const getExistingPhotoData = (tsPath: string) => {
   if (!fs.existsSync(tsPath)) {
     return null;
   }
@@ -45,7 +53,7 @@ const getExistingData = (tsPath: string) => {
 };
 
 /**
- * 画像の撮影日時を取得
+ * 画像の撮影日時を取得する
  */
 const getExif = (exifBuffer?: Buffer): ExifData => {
   if (!exifBuffer) {
@@ -113,8 +121,8 @@ const resize = (img: Sharp, maxSize: number, width: number, height: number) => {
 
 const createPhotos = async (args: InputArguments) => {
   // 既存のデータを読み込み
-  const tsPath = path.join("src/app/photos/_const/", `${args.key}.ts`);
-  const existingData = getExistingData(tsPath);
+  const tsPath = path.join("src/app/photos/const/", `${args.key}.ts`);
+  const existingPhotoData = getExistingPhotoData(tsPath);
 
   // ディレクトリを作成
   const tempDirPath = path.join(args.input_dir, "dst");
@@ -126,9 +134,12 @@ const createPhotos = async (args: InputArguments) => {
 
   const jpgPath = path.join(args.input_dir, "*.jpg");
   const jpegPath = path.join(args.input_dir, "*.jpeg");
-  const imgPaths = [...glob.sync(jpgPath), ...glob.sync(jpegPath)].sort(
-    (a, b) => natsort()(a, b),
-  );
+  const pngPath = path.join(args.input_dir, "*.png");
+  const imgPaths = [
+    ...glob.sync(jpgPath),
+    ...glob.sync(jpegPath),
+    ...glob.sync(pngPath),
+  ].sort((a, b) => naturalsort()(a, b));
 
   const photoInfos: PhotoInfo[] = [];
   const processedSrcs: string[] = [];
@@ -174,7 +185,7 @@ const createPhotos = async (args: InputArguments) => {
     const thumbnailPath = path.join(thumbnailDirPath, filename);
     thumbnailResized.webp({ quality: THUMBNAIL_QUALITY }).toFile(thumbnailPath);
 
-    const existingPhotoInfo = existingData?.photos?.find(
+    const existingPhotoInfo = existingPhotoData?.photos?.find(
       (photo) => photo.src === filename,
     );
 
@@ -190,14 +201,16 @@ const createPhotos = async (args: InputArguments) => {
   }
 
   // データを作成
-  const title = existingData?.title ?? "";
-  const date = existingData?.date ?? "";
+  const title = existingPhotoData?.title ?? "";
+  const date = existingPhotoData?.date ?? "";
   // 今回処理していない画像
-  const existingPhotos = existingData
-    ? existingData.photos.filter((photo) => !processedSrcs.includes(photo.src))
+  const existingPhotos = existingPhotoData
+    ? existingPhotoData.photos.filter(
+        (photo) => !processedSrcs.includes(photo.src),
+      )
     : [];
   const photos = [...existingPhotos, ...photoInfos].sort((a, b) =>
-    natsort()(a.src, b.src),
+    naturalsort()(a.src, b.src),
   );
 
   const data: PhotoData = {
@@ -206,7 +219,7 @@ const createPhotos = async (args: InputArguments) => {
     key: args.key,
     photos,
   };
-  const ts = `import { PhotoData } from "@/lib/photo";
+  const ts = `import type { PhotoData } from "@/lib/photo";
 
   const data: PhotoData = ${JSON.stringify(data, null, "  ")};
 
