@@ -4,7 +4,8 @@ Vite + React で構築された個人サイトです。GitHub Actions を用い�
 
 <https://いなにわうどん.みんな>
 
-バックエンド：[inaniwaudon-minna-backend](https://github.com/inaniwaudon/inaniwaudon-minna-backend)
+- 旧レポジトリ：[inaniwaudon-minna](https://github.com/inaniwaudon/inaniwaudon-minna)
+- バックエンド：[inaniwaudon-minna-backend](https://github.com/inaniwaudon/inaniwaudon-minna-backend)
 
 ## Development
 
@@ -23,7 +24,8 @@ WebP 形式に圧縮した上で、Cloudflare R2 にアップロードし、メ�
 ただし、同名の写真が存在する場合は、タイトル・場所以外の項目が上書きされる。
 
     ```bash
-    npx ts-node script/compress-image.ts $key $input_dir
+    cd script
+    npx tsx compress-image.ts $key $input_dir
     ```
     
     以下のファイルが生成される。
