@@ -24,8 +24,7 @@ WebP 形式に圧縮した上で、Cloudflare R2 にアップロードし、メ�
 ただし、同名の写真が存在する場合は、タイトル・場所以外の項目が上書きされる。
 
     ```bash
-    cd script
-    npx tsx compress-image.ts $key $input_dir
+    npx tsx script/compress-image.ts $key $input_dir
     ```
     
     以下のファイルが生成される。
@@ -34,12 +33,14 @@ WebP 形式に圧縮した上で、Cloudflare R2 にアップロードし、メ�
     - `$input_dir/dst/*.webp`：圧縮後画像
     - `$input_dir/dst/thumbnail/*.webp`：サムネイル用画像
 
-2. 生成された画像ファイルを `/photo` に移動させる
+2. 生成された画像ファイルを `/public/$foo` に移動させる
 
-3. `/photo` を `s3://site-photos/photo/$key` と同期する
+3. http://localhost:3000/:key/add?dir=/foo にアクセスしてタイトルおよび場所を入力する。入力が完了したら JSON を出力し、内容を `$key.json` とマージする
+
+4. 画像を `s3://site-photos/photo/$key` と同期する
 
     ```bash
-    aws s3 sync photos s3://site-photos/photo/$key --profile r2 --endpoint-url https://**.r2.cloudflarestorage.com --dryrun
+    aws s3 sync /public/$foo */ s3://site-photos/photo/$key --profile r2 --endpoint-url https://**.r2.cloudflarestorage.com --dryrun
     ```
 
 4. JSON ファイルを編集してコミットする
