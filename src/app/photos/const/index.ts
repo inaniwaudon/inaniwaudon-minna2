@@ -3,6 +3,7 @@ import data2022kyushu from "./2022kyushu";
 import data2023hokkaido from "./2023hokkaido";
 import data2024kyoto from "./2024kyoto";
 import data2024taiwan from "./2024taiwan";
+import data2024toyohashi from "./2024toyohashi";
 import data210301ysfh from "./210301ysfh";
 import dataKirigirisu from "./kirigirisu";
 import dataKiroro from "./kiroro";
@@ -20,6 +21,10 @@ export const photos: Photo[] = [
   {
     title: "キリギリス",
     data: dataKirigirisu,
+  },
+  {
+    title: "豊橋・高山旅行（2024/11/15–19）",
+    data: data2024toyohashi,
   },
   {
     title: "京都（2024/6/20–21）",
