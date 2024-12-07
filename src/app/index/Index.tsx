@@ -191,7 +191,12 @@ const Main = () => {
       <Wrapper>
         <Content>
           <H1>
-            <img src={logo} height={36} alt="いなにわうどん.みんな" />
+            <img
+              src={logo}
+              width={450}
+              height={36}
+              alt="いなにわうどん.みんな"
+            />
           </H1>
           <Description>
             横スクロールでページ全体を、縦スクロールで一部を移動します
