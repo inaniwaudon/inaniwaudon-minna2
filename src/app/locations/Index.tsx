@@ -28,7 +28,7 @@ const Index = () => {
             <AnchorListItem
               key={location.id}
               href={`${location.id}`}
-              title={location.title}
+              title={`${location.title}（${location.date}）`}
             />
           ))}
         </CustomList>
