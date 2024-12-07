@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 
 import NotFound from "@/app/404/Index";
 import AdobeFonts from "@/components/common/AdobeFonts";
-import type { PhotoInfo } from "@/lib/photo";
+import { type PhotoInfo, getPhotoDir } from "@/lib/photo";
 import { photos } from "../const";
 import Main from "./Main";
 
@@ -69,12 +69,12 @@ export type PhotoList = ({
 const Index = () => {
   const { id } = useParams();
   const photoData = photos.find((photo) => photo.data?.key === id)?.data;
-  if (!photoData) {
+  if (!id || !photoData) {
     return <NotFound />;
   }
 
   const { title, date } = photoData;
-  const dir = `${import.meta.env.VITE_PHOTO_URL}/photo/${id}`;
+  const dir = getPhotoDir(id);
   const titleLast = title[title.length - 1];
 
   const newPhotos = photoData.photos.map((photo) => ({
