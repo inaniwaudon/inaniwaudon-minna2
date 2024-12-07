@@ -15,3 +15,7 @@ export interface PhotoInfo {
   width: number;
   height: number;
 }
+
+export const getPhotoDir = (id: string) => {
+  return `${import.meta.env.VITE_PHOTO_URL}/photo/${id}`;
+};

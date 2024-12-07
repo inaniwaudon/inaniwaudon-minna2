@@ -1,7 +1,5 @@
 import styled from "@emotion/styled";
 
-import jikan from "@/assets/index/jikan.webp";
-import H2 from "@/components/common/H2";
 import { links } from "./const/link";
 
 const List = styled.ul`
@@ -73,40 +71,28 @@ const Description = styled.div`
   font-size: 14px;
 `;
 
-const Bunner = styled.div`
-  margin-top: 16px;
-`;
-
 const LinkList = () => {
   return (
-    <section>
-      <H2>外部リンク</H2>
-      <List>
-        {links.map(({ color, name, url, platform, icon }) => (
-          <Link key={url}>
-            <LinkContent color={color}>
-              <LinkAnchor href={url}>
-                <IconWrapper>
-                  <IconImage
-                    src={icon.url}
-                    scale={icon.scale}
-                    alt=""
-                    className="image"
-                  />
-                </IconWrapper>
-                <Platform className="platform">{platform}</Platform>
-                <Description>{name}</Description>
-              </LinkAnchor>
-            </LinkContent>
-          </Link>
-        ))}
-      </List>
-      <Bunner>
-        <a href="https://sites.google.com/view/happy-busy/" rel="nofollow">
-          <img src={jikan} alt="時間ねぇ〜" />
-        </a>
-      </Bunner>
-    </section>
+    <List>
+      {links.map(({ color, name, url, platform, icon }) => (
+        <Link key={url}>
+          <LinkContent color={color}>
+            <LinkAnchor href={url}>
+              <IconWrapper>
+                <IconImage
+                  src={icon.url}
+                  scale={icon.scale}
+                  alt=""
+                  className="image"
+                />
+              </IconWrapper>
+              <Platform className="platform">{platform}</Platform>
+              <Description>{name}</Description>
+            </LinkAnchor>
+          </LinkContent>
+        </Link>
+      ))}
+    </List>
   );
 };
 

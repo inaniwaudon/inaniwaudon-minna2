@@ -1,15 +1,14 @@
 import styled from "@emotion/styled";
 
 import Checkbox from "@/components/common/Checkbox";
-import H2 from "@/components/common/H2";
 import { useCustomParams } from "@/lib/useCustomParams";
 import { nengajo } from "./const/nengajo";
 
-const Header = styled.header`
-  margin: 6px 0 20px 0;
+const Wrapper = styled.div`
   display: flex;
-  align-items: center;
-  gap: 20px;
+  flex-direction: column;
+  flex-wrap: column;
+  gap: 16px;
 `;
 
 const ImgWrapper = styled.div<{ displays: boolean }>`
@@ -19,6 +18,8 @@ const ImgWrapper = styled.div<{ displays: boolean }>`
 const Img = styled.img`
   max-width: 500px;
   max-height: 500px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   transition: box-shadow 0.2s ease;
 
   @media screen and (max-width: 500px) {
@@ -29,6 +30,12 @@ const Img = styled.img`
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     overflow: hidden;
   }
+`;
+
+const Navigation = styled.nav`
+  display: flex;
+  align-items: center;
+  gap: 20px;
 `;
 
 const tags = [
@@ -45,11 +52,10 @@ const Nengajo = () => {
   const year = yearStr ? Number.parseInt(yearStr) : 2024;
 
   return (
-    <div>
-      <Header>
-        <H2 style={{ margin: "0" }}>年賀状</H2>
+    <Wrapper>
+      <Navigation>
         <Checkbox paramKey="year" tags={tags} customParams={customParams} />
-      </Header>
+      </Navigation>
       {nengajo.map((item) => (
         <ImgWrapper displays={item.year === year} key={item.year}>
           <a href={item.src}>
@@ -61,7 +67,7 @@ const Nengajo = () => {
           </a>
         </ImgWrapper>
       ))}
-    </div>
+    </Wrapper>
   );
 };
 
