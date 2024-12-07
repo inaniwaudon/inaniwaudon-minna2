@@ -340,6 +340,19 @@ const articleZennLinks: ArticleLink[] = [
     date: "2024/09/18",
     tags: ["tech"],
   },
+  {
+    href: "https://zenn.dev/inaniwaudon/articles/5d040f543c4c69",
+    title: "TypeScript でプログラマブルに動く日本語組版処理システムの提案",
+    date: "2024/12/02",
+    tags: ["tech"],
+  },
+  {
+    href: "https://zenn.dev/inaniwaudon/articles/a7e4577fbe389f",
+    title:
+      "Cloudflare Workers 経由でオブジェクトストレージ代わりにGoogle ドライブを使う",
+    date: "2024/12/03",
+    tags: ["tech"],
+  },
 ];
 
 const articleNoteLinks: ArticleLink[] = [
