@@ -2,7 +2,6 @@ import styled from "@emotion/styled";
 
 import Checkbox from "@/components/common/Checkbox";
 import { useCustomParams } from "@/lib/useCustomParams";
-import { Helmet } from "react-helmet-async";
 import { nengajo } from "./const/nengajo";
 
 const Wrapper = styled.div`
