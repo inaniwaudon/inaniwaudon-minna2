@@ -137,7 +137,6 @@ const Header = () => {
     <>
       <Wrapper width={y === null ? 0 : 300} onMouseLeave={() => setY(null)}>
         <Content>
-          <input type="text" />
           <CustomList>
             {items.map((item) => (
               <ListItem key={item.href}>
