@@ -1,7 +1,12 @@
+import thumbnail2022 from "@/assets/index/nenga2022.webp";
+import thumbnail2023 from "@/assets/index/nenga2023.webp";
+import thumbnail2024 from "@/assets/index/nenga2024.webp";
+
 export const nengajo = [
   {
     year: 2024,
     src: "./assets/nenga2024.webp",
+    thumbnail: thumbnail2024,
     width: 4196,
     height: 2835,
     alt: `「あけましておめでとうございます。旧年中は大変お世話になりました。本年もどうぞよろしくお願い申し上げます。」の文言が右上に添えられています。
@@ -13,6 +18,7 @@ export const nengajo = [
   {
     year: 2023,
     src: "./assets/nenga2023.webp",
+    thumbnail: thumbnail2023,
     width: 4196,
     height: 2835,
     alt: `「あけましておめでとうございます。旧年中は大変お世話になりました。今年もどうぞよろしくお願い申し上げます。」の文言が左上に添えられています。
@@ -22,6 +28,7 @@ export const nengajo = [
   {
     year: 2022,
     src: "./assets/nenga2022.webp",
+    thumbnail: thumbnail2022,
     width: 2551,
     height: 3776,
     alt: `「あけましておめでとうございます。旧年中は大変お世話になりました。本年もどうぞよろしくお願い申し上げます。の文言が左上に添えられています。
