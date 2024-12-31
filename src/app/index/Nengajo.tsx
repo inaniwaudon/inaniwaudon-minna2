@@ -40,16 +40,19 @@ const Navigation = styled.nav`
 `;
 
 const tags = [
+  { key: "2025", label: "2025", keyColor: "#fa981c" },
   { key: "2024", label: "2024", keyColor: "#fa981c" },
   { key: "2023", label: "2023", keyColor: "#ff32ab" },
   { key: "2022", label: "2022", keyColor: "#2656f3" },
 ];
 
 const Nengajo = () => {
-  const customParams = useCustomParams("year", false, "2024");
+  const customParams = useCustomParams("year", false, "2025");
   const { isSelectedTag } = customParams;
 
-  const yearStr = ["2024", "2023", "2022"].find((year) => isSelectedTag(year));
+  const yearStr = ["2025", "2024", "2023", "2022"].find((year) =>
+    isSelectedTag(year),
+  );
   const year = yearStr ? Number.parseInt(yearStr) : 2024;
 
   const currentNengajo = nengajo.find((item) => item.year === year);

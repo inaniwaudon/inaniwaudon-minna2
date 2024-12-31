@@ -164,6 +164,12 @@ const articleHatenaLinks: ArticleLink[] = [
     date: "2024/10/07",
     tags: ["design"],
   },
+  {
+    href: "https://soudakyoto-ikou.hatenadiary.jp/entry/20241223/1734961667",
+    title: "独自のプレゼンツールと卒論の進捗を共有する仕組みを作った",
+    date: "2024/12/23",
+    tags: ["tech"],
+  },
 ];
 
 const articleZennLinks: ArticleLink[] = [
