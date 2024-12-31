@@ -19,7 +19,7 @@ const Wrapper = styled.header<{ width: number }>`
 
 const Content = styled.div`
   width: 300px;
-  margin: 8px 16px;
+  margin: 32px 16px;
 `;
 
 const Border = styled.div`
@@ -31,6 +31,7 @@ const Border = styled.div`
 `;
 
 const ListItem = styled.li`
+  padding: 2px 0;
   display: flex;
   align-items: center;
 `;
