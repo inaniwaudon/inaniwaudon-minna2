@@ -6,6 +6,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./globals.css";
 import NotFound from "./app/404/Index.tsx";
 import About from "./app/about/Index.tsx";
+import Article2024 from "./app/articles/2024/Index.tsx";
 import Articles from "./app/articles/Index.tsx";
 import Diary from "./app/articles/diary/Index.tsx";
 import Max from "./app/articles/max/Index.tsx";
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
   {
     path: "/articles",
     element: <Articles />,
+  },
+  {
+    path: "/articles/2024",
+    element: <Article2024 />,
   },
   {
     path: "/articles/diary",

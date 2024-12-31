@@ -444,7 +444,7 @@ const articleOthersLinks: ArticleLink[] = [
     title:
       "グリッドレイアウトに基づく組版作業を支援する手書きストロークを入力としたインタフェース",
     date: "2023/03/01",
-    description: "情報処理学会 インタラクション 2023",
+    description: "インタラクション 2023",
     tags: ["tech"],
   },
   {
@@ -481,6 +481,20 @@ const articleOthersLinks: ArticleLink[] = [
     date: "2024/07/28",
     description: "筑波大学情報メディア創成学類 夏の大学説明会",
     tags: ["random", "speaking"],
+  },
+  {
+    href: "https://www.wiss.org/WISS2024Proceedings/data/paper/10.pdf",
+    title: "母音，子音の順に選択を行う間接タッチ用かな文字入力手法",
+    date: "2024/12/12",
+    description: "WISS 2024",
+    tags: ["tech"],
+  },
+  {
+    href: "/articles/2024",
+    title: "2024 年を振り返って",
+    date: "2024/12/31",
+    description: "いなにわうどん.みんな",
+    tags: ["random"],
   },
 ];
 
