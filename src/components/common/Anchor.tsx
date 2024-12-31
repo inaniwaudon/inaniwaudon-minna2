@@ -1,3 +1,4 @@
+import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
 
@@ -7,12 +8,12 @@ export const linkUnderlineColor = "rgba(0, 0, 0, 0.2)";
 export const linkUnderlineDarkColor = "rgba(255, 255, 255, 0.2)";
 export const linkHoverColor = "rgba(223, 81, 168, 1.0)";
 
-const Content = styled.span<{ dark: boolean }>`
+const anchorStyle = css`
   line-height: 1.3;
-  color: ${({ dark }) => (dark ? linkDarkColor : linkColor)};
   font-weight: 600;
-  text-decoration: none;
-  display: inline-block;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 5px;
+  display: inline;
   cursor: pointer;
   transition: background 200ms;
 
@@ -21,11 +22,16 @@ const Content = styled.span<{ dark: boolean }>`
   }
 `;
 
-const Line = styled.span<{ dark: boolean }>`
-  height: 1px;
-  margin-top: 2px;
-  background: ${({ dark }) => (dark ? linkUnderlineDarkColor : linkUnderlineColor)};
-  display: block;
+const CustomAnchor = styled.a<{ dark: boolean }>`
+  ${anchorStyle}
+  color: ${({ dark }) => (dark ? linkDarkColor : linkColor)};
+  text-decoration-color: ${({ dark }) => (dark ? linkUnderlineDarkColor : linkUnderlineColor)};
+`;
+
+const CustomLink = styled(Link)<{ dark: boolean }>`
+  ${anchorStyle}
+  color: ${({ dark }) => (dark ? linkDarkColor : linkColor)};
+  text-decoration-color: ${({ dark }) => (dark ? linkUnderlineDarkColor : linkUnderlineColor)};
 `;
 
 interface PageAnchorProps {
@@ -35,15 +41,12 @@ interface PageAnchorProps {
 }
 
 const Anchor = ({ href, dark = false, children }: PageAnchorProps) => {
-  const content = (
-    <Content dark={dark}>
-      {children}
-      <Line dark={dark} />
-    </Content>
-  );
-
   if (href.startsWith("https://") || href.startsWith("http://")) {
-    return <a href={href}>{content}</a>;
+    return (
+      <CustomAnchor href={href} dark={dark}>
+        {children}
+      </CustomAnchor>
+    );
   }
   if (
     href.endsWith(".pdf") ||
@@ -54,12 +57,16 @@ const Anchor = ({ href, dark = false, children }: PageAnchorProps) => {
     href.endsWith(".json")
   ) {
     return (
-      <Link to={href} reloadDocument>
-        {content}
-      </Link>
+      <CustomLink to={href} dark={dark} reloadDocument>
+        {children}
+      </CustomLink>
     );
   }
-  return <Link to={href}>{content}</Link>;
+  return (
+    <CustomLink to={href} dark={dark}>
+      {children}
+    </CustomLink>
+  );
 };
 
 export default Anchor;
