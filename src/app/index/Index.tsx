@@ -3,10 +3,16 @@ import { useMemo } from "react";
 import { Helmet } from "react-helmet-async";
 
 import { photos } from "@/app/photos/const";
-import iorinio from "@/assets/index/iorin-io.webp";
-import itsudev from "@/assets/index/itsu-dev.svg";
 import jikan from "@/assets/index/jikan.webp";
 import logo from "@/assets/index/logo2.svg";
+
+import s210on from "@/assets/index/links/210on.svg";
+import asaka from "@/assets/index/links/asaka.webp";
+import charlotteace from "@/assets/index/links/charlotteace.webp";
+import eka from "@/assets/index/links/eka.webp";
+import iorinio from "@/assets/index/links/iorin-io.webp";
+import itsudev from "@/assets/index/links/itsu-dev.svg";
+import nakaya from "@/assets/index/links/nakaya.webp";
 
 import Anchor, { linkColor } from "@/components/common/Anchor";
 import AnchorListItem from "@/components/common/AnchorListItem";
@@ -137,10 +143,12 @@ const PhotoThumbnail = styled.div<{ src?: string }>`
 const CrossLinks = styled.div`
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 24px;
 `;
 
 const CrossLink = styled.a`
+  line-height: 1.2;
   color: ${linkColor};
   text-decoration: none;
   display: flex;
@@ -153,12 +161,16 @@ const CrossLink = styled.a`
     transform: scale(1.05);
   }
 
-  img {  
+  img {
     width: 96px;
     height: 96px;
     border: solid 1px #ccc;
     border-radius: 50%;
     margin-bottom: 8px;
+
+    &.noborder {
+      border: none;
+    }
   }
 `;
 
@@ -335,12 +347,34 @@ const Main = () => {
           <H2>相互リンク</H2>
           <CrossLinks>
             <CrossLink href="https://itsu.dev">
-              <img src={itsudev} alt="itsu-dev" />
+              <img src={itsudev} alt="" />
               itsu.dev
             </CrossLink>
             <CrossLink href="https://iorin.io">
-              <img src={iorinio} alt="iorin-io" />
+              <img src={iorinio} alt="" />
               iorin.io
+            </CrossLink>
+            <CrossLink href="https://charlotteace.github.io">
+              <img src={charlotteace} alt="" />
+              シャーロット
+              <br />
+              エースの部屋
+            </CrossLink>
+            <CrossLink href="https://www.eniehack.net/~eniehack/mutual_link">
+              <img src={nakaya} alt="" />
+              なかやばし
+            </CrossLink>
+            <CrossLink href="https://210o.net">
+              <img src={s210on} alt="" className="noborder" />
+              210o.net
+            </CrossLink>
+            <CrossLink href="https://asaka.party">
+              <img src={asaka} alt="" />
+              asaka.party
+            </CrossLink>
+            <CrossLink href="https://www.eka.earth">
+              <img src={eka} alt="" />
+              eka.earth
             </CrossLink>
           </CrossLinks>
           <Bunner>
