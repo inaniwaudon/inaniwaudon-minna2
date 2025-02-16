@@ -5,16 +5,24 @@ import { useMemo, useState } from "react";
 import Anchor from "./Anchor";
 import CustomList from "./CustomList";
 
-const Wrapper = styled.header<{ width: number }>`
-  width: ${({ width }) => width}px;
+const Wrapper = styled.header<{ opened: boolean }>`
+  width: ${({ opened }) => (opened ? 300 : 5)}px;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, ${({ opened }) => (opened ? 0.8 : 0.2)});
+  backdrop-filter: blur(${({ opened }) => (opened ? 8 : 0)}px);
   position: fixed;
   top: 0;
   left: 0;
   overflow: hidden;
   transition: width 200ms;
+
+  * {
+    display: ${({ opened }) => (!opened ? "none" : "")};
+  }
+
+  @media (max-width: 700px) {
+    display: none;
+  }  
 `;
 
 const Content = styled.div`
@@ -23,7 +31,7 @@ const Content = styled.div`
 `;
 
 const Border = styled.div`
-  width: 4px;
+  width: 5px;
   height: 100vh;
   position: fixed;
   top: 0;
@@ -136,7 +144,7 @@ const Header = () => {
 
   return (
     <>
-      <Wrapper width={y === null ? 0 : 300} onMouseLeave={() => setY(null)}>
+      <Wrapper opened={y !== null} onMouseLeave={() => setY(null)}>
         <Content>
           <CustomList>
             {items.map((item) => (
