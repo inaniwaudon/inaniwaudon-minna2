@@ -19,6 +19,10 @@ const Wrapper = styled.header<{ opened: boolean }>`
   * {
     display: ${({ opened }) => (!opened ? "none" : "")};
   }
+
+  @media (max-width: 700px) {
+    display: none;
+  }  
 `;
 
 const Content = styled.div`
@@ -27,7 +31,7 @@ const Content = styled.div`
 `;
 
 const Border = styled.div`
-  width: 4px;
+  width: 5px;
   height: 100vh;
   position: fixed;
   top: 0;
