@@ -401,7 +401,7 @@ const articleWordLinks: ArticleLink[] = [
     tags: ["random"],
   },
   {
-    href: "https://www.word-ac.net/post/2022/0811-word52/",
+    href: "/docs/word-energy.pdf",
     title: "令和4年度版 おすすめエナドリ 10 選",
     date: "2022/08/11",
     description: "WORD 52号",
@@ -415,7 +415,7 @@ const articleWordLinks: ArticleLink[] = [
     tags: ["hongoshi", "tech"],
   },
   {
-    href: "https://www.word-ac.net/post/2024/0409-iwai2024/",
+    href: "/docs/word-kakuteishinkoku.pdf",
     title: "確定申告バトル 2024",
     date: "2024/04/09",
     description: "WORD 入学祝い号 2024",
