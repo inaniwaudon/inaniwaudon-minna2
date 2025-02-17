@@ -360,7 +360,7 @@ const Main = () => {
               <br />
               エースの部屋
             </CrossLink>
-            <CrossLink href="https://www.eniehack.net/~eniehack/mutual_link">
+            <CrossLink href="https://www.eniehack.net/~eniehack/mutual_links">
               <img src={nakaya} alt="" />
               なかやばし
             </CrossLink>
