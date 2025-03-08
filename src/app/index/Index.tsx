@@ -10,6 +10,7 @@ import s210on from "@/assets/index/links/210on.svg";
 import asaka from "@/assets/index/links/asaka.webp";
 import charlotteace from "@/assets/index/links/charlotteace.webp";
 import eka from "@/assets/index/links/eka.webp";
+import fuwafuwa from "@/assets/index/links/fuwafuwa.webp";
 import iorinio from "@/assets/index/links/iorin-io.webp";
 import itsudev from "@/assets/index/links/itsu-dev.svg";
 import nakaya from "@/assets/index/links/nakaya.webp";
@@ -375,6 +376,10 @@ const Main = () => {
             <CrossLink href="https://www.eka.earth">
               <img src={eka} alt="" />
               eka.earth
+            </CrossLink>
+            <CrossLink href="https://ふわふわ.みんな">
+              <img src={fuwafuwa} alt="" />
+              ふわふわ.みんな
             </CrossLink>
           </CrossLinks>
           <Bunner>
