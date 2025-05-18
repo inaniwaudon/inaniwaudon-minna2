@@ -359,6 +359,18 @@ const articleZennLinks: ArticleLink[] = [
     date: "2024/12/03",
     tags: ["tech"],
   },
+  {
+    href: "https://zenn.dev/inaniwaudon/articles/37be5301f93791",
+    title: "Apple Watch—Mac 間で Bluetooth Low Energy（BLE）",
+    date: "2025/04/28",
+    tags: ["tech"],
+  },
+  {
+    href: "https://zenn.dev/inaniwaudon/articles/59ea8b09208c29",
+    title: "DTP は MCP の夢を見るか？ LLM で Illustrator の作業効率化を試みる",
+    date: "2025/05/11",
+    tags: ["tech", "design", "hongoshi"],
+  },
 ];
 
 const articleNoteLinks: ArticleLink[] = [
@@ -501,6 +513,13 @@ const articleOthersLinks: ArticleLink[] = [
     date: "2024/12/31",
     description: "いなにわうどん.みんな",
     tags: ["random"],
+  },
+  {
+    href: "https://slide.yokohama.dev/rubic-interface",
+    title: "ルービックキューブ型インタフェース",
+    date: "2025/05/18",
+    description: "UNTIL.LT #0x07",
+    tags: ["tech", "speaking"],
   },
 ];
 
