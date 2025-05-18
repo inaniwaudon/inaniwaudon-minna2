@@ -3,8 +3,15 @@ import thumbnail2024nagoya from "@/assets/locations/2024nagoya.webp";
 import thumbnail2024sanriku from "@/assets/locations/2024sanriku.webp";
 import thumbnail2024taiwan from "@/assets/locations/2024taiwan.webp";
 import thumbnail2024toyohashi from "@/assets/locations/2024toyohashi.webp";
+import thumbnail2025kagoshima from "@/assets/locations/2025kagoshima.webp";
 
 export const locations = [
+  {
+    title: "鹿児島・熊本旅行",
+    date: "2025/3/17–19",
+    id: "2025kagoshima",
+    thumbnail: thumbnail2025kagoshima,
+  },
   {
     title: "豊橋・高山旅行",
     date: "2024/11/15–19",
