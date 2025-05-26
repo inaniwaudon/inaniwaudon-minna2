@@ -521,6 +521,13 @@ const articleOthersLinks: ArticleLink[] = [
     description: "UNTIL.LT #0x07",
     tags: ["tech", "speaking"],
   },
+  {
+    href: "https://slide.yokohama.dev/dtp-mcp",
+    title: "DTP は MCP の夢を見るか？ LLM で Illustrator の作業効率化を試みる",
+    date: "2025/05/25",
+    description: "アドビアプリ自動化もくもく会 #3",
+    tags: ["tech", "design", "speaking"],
+  },
 ];
 
 export const articleLinks = (() => {
