@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import H3 from "@/components/common/H3";
 import PageTitle from "@/components/common/PageTitle";
 import PageWrapper from "@/components/common/PageWrapper";
-import text from "./text";
+import { diaryItems } from "./text";
 
 const title = "日記";
 
@@ -40,34 +40,11 @@ const Photo = styled.img`
 `;
 
 const Index = () => {
-  const lines = text
-    .split("\n")
-    .map((line) => line.trim())
-    .filter((line) => line.length > 0);
-
-  const items: {
-    date: string;
-    body: string;
-    photo?: { src: string; alt: string };
-  }[] = [];
-  for (const line of lines) {
-    if (line.match(/^\d{4}\/\d{1,2}/) || line.match(/^\d+ 月のふりかえり/)) {
-      items.push({ date: line, body: "" });
-    } else {
-      if (line.startsWith("!")) {
-        const splited = line.slice(1).split("|");
-        items.at(-1)!.photo = { src: splited[0], alt: splited[1] ?? "" };
-      } else {
-        items.at(-1)!.body += line;
-      }
-    }
-  }
-
   return (
     <PageWrapper title={title} path="/articles">
       <Main>
         <PageTitle>日記</PageTitle>
-        {items.map(({ date, body, photo }) => (
+        {diaryItems.map(({ date, body, photo }) => (
           <div key={date}>
             <H3>{date}</H3>
             <Paragraph>{body}</Paragraph>
