@@ -1,5 +1,6 @@
 import text2023 from "./2023.txt?raw";
 import text2024 from "./2024.txt?raw";
+import text2025 from "./2025.txt?raw";
 
 export const diaryItems = (() => {
   const items: {
@@ -8,14 +9,14 @@ export const diaryItems = (() => {
     photo?: { src: string; alt: string };
   }[] = [];
 
-  for (const text of [text2023, text2024]) {
+  for (const text of [text2023, text2024, text2025]) {
     const lines = text
       .split("\n")
       .map((line) => line.trim())
       .filter((line) => line.length > 0);
 
     for (const line of lines) {
-      if (line.match(/^\d{4}\/\d{1,2}/) || line.match(/^\d+ 月のふりかえり/)) {
+      if (line.match(/^\d{4}\/\d{1,2}/) || line.match(/^.+のふりかえり/)) {
         items.push({ date: line, body: "" });
       } else {
         if (line.startsWith("!")) {
