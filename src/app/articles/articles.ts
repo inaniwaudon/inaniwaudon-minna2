@@ -170,6 +170,12 @@ const articleHatenaLinks: ArticleLink[] = [
     date: "2024/12/23",
     tags: ["tech"],
   },
+  {
+    href: "https://soudakyoto-ikou.hatenadiary.jp/entry/20250601/1748713476",
+    title: "Dock やタスクバーは右側に置くべきかもしれない",
+    date: "2025/06/01",
+    tags: ["random"],
+  },
 ];
 
 const articleZennLinks: ArticleLink[] = [
@@ -370,6 +376,12 @@ const articleZennLinks: ArticleLink[] = [
     title: "DTP は MCP の夢を見るか？ LLM で Illustrator の作業効率化を試みる",
     date: "2025/05/11",
     tags: ["tech", "design", "hongoshi"],
+  },
+  {
+    href: "https://zenn.dev/inaniwaudon/articles/2445ff6731afef",
+    title: "Web 上で Cursor や Copilot のようなタブ入力補完を実装する",
+    date: "2025/06/09",
+    tags: ["tech"],
   },
 ];
 
