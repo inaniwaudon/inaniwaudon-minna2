@@ -45,16 +45,20 @@ export const creations: Creation[] = [
     url: "https://inaniwaudon.github.io/genkotsu",
   },
   {
+    title: "tsukuba.yokohama.dev",
+    url: "https://tsukuba.yokohama.dev",
+  },
+  {
+    title: "sotsuron.yokohama.dev",
+    url: "https://sotsuron.yokohama.dev",
+  },
+  {
     title: "URL 延長サービス",
     url: "https://extend-url.yokohama.dev",
   },
   {
     title: "public-pizza",
     url: "https://github.com/inaniwaudon/public-pizza",
-  },
-  {
-    title: "cmap-display",
-    url: "https://cmap-display.pages.dev",
   },
   {
     title: "github-issues-due",
@@ -65,7 +69,7 @@ export const creations: Creation[] = [
     url: "https://mail-segmenter.yokohama.dev",
   },
   {
-    title: "sotsuron.yokohama.dev",
-    url: "https://sotsuron.yokohama.dev",
+    title: "cmap-display",
+    url: "https://cmap-display.pages.dev",
   },
 ];
