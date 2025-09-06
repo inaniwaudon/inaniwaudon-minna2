@@ -28,8 +28,8 @@ CF_ACCOUNT_ID=<CF_ACCOUNT_ID>
 一部コンテンツは、[cmsr2](https://github.com/inaniwaudon/cmsr2) を用いて管理します。
 内容の更新には、以下のいずれかを実行します。
 
-- `yarn run prebuild` を実行してコミットする
-- workflow（`prebuild.yml`）を実行する
+- `yarn run fetch` を実行してコミットする
+- workflow（`fetch.yml`）を実行する
 
 ## 写真の更新
 
