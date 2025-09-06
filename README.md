@@ -26,12 +26,10 @@ CF_ACCOUNT_ID=<CF_ACCOUNT_ID>
 ## コンテンツの更新
 
 一部コンテンツは、[cmsr2](https://github.com/inaniwaudon/cmsr2) を用いて管理します。
+内容の更新には、以下のいずれかを実行します。
 
-以下のスクリプトを実行してコミットするか、workflow（`prebuild.yml`）を手動実行することにより、内容を更新します。
-
-```bash
-npx tsx script/prebuild.ts
-```
+- `yarn run prebuild` を実行してコミットする
+- workflow（`prebuild.yml`）を実行する
 
 ## 写真の更新
 
