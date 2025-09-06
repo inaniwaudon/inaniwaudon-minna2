@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "lint": "biome lint ./src --max-diagnostics=200",
     "format": "biome format ./src --write --max-diagnostics=200",
-    "prebuild": "tsx script/prebuild.ts"
+    "fetch": "tsx script/fetch.ts"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.1.0",
