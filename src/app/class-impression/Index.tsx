@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 import Anchor from "@/components/common/Anchor";
 import PageWrapper from "@/components/common/PageWrapper";
-import { classImpressions } from "./const";
+import classImpressions from "./contents/index.json";
 
 const Wrapper = styled.div`
   max-width: 1000px;
