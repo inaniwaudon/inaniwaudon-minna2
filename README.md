@@ -15,11 +15,19 @@ yarn run dev
 yarn run build
 ```
 
+デプロイ用に、Environment Secret に以下を設定します
+
+```bash
+CMSR2_TOKEN=<CMSR2_TOKEN>
+CF_API_TOKEN=<CF_API_TOKEN>
+CF_ACCOUNT_ID=<CF_ACCOUNT_ID>
+```
+
 ## コンテンツの更新
 
 一部コンテンツは、[cmsr2](https://github.com/inaniwaudon/cmsr2) を用いて管理します。
 
-以下のスクリプトを実行してコミットするか、workflow（`prebuild.yml`）を実行することにより、内容を更新します。
+以下のスクリプトを実行してコミットするか、workflow（`prebuild.yml`）を手動実行することにより、内容を更新します。
 
 ```bash
 npx tsx script/prebuild.ts

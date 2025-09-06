@@ -1,8 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 
-//const cmsUrl = "https://cms.yokohama.dev";
-const cmsUrl = "http://localhost:8787";
+const cmsUrl = "https://cms.yokohama.dev";
 
 const fetchData = async <T>(path: string) => {
   const url = new URL(`/api/files/web/${path}`, cmsUrl);
