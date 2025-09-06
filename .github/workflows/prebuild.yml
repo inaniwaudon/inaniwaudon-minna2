@@ -24,7 +24,7 @@ jobs:
         if: ${{ steps.cache-dependency.outputs.cache-hit != 'true' }}
         run: yarn install --frozen-lockfile
       - name: Prebuild
-        run: npx tsx script/prebuild.ts
+        run: yarn run prebuild
         env:
           CMSR2_TOKEN: ${{ secrets.CMSR2_TOKEN }}
       - name: Configure Git
