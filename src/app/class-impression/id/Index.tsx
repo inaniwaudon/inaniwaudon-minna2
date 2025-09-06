@@ -9,7 +9,12 @@ import { unified } from "unified";
 import NotFound from "@/app/404/Index";
 import Anchor from "@/components/common/Anchor";
 import PageWrapper from "@/components/common/PageWrapper";
-import { classImpressions } from "../const";
+import classImpressions from "../contents/index.json";
+
+const articles = import.meta.glob("../contents/*.md", {
+  as: "raw",
+  eager: true,
+});
 
 const Wrapper = styled.div`
   max-width: 1000px;
@@ -67,7 +72,7 @@ const Index = () => {
     return <NotFound />;
   }
 
-  const { year, term, description, article } = info;
+  const { year, term, description } = info;
   const title = getTitle(year, term);
 
   const contents = unified()
@@ -78,7 +83,7 @@ const Index = () => {
       jsx: prod.jsx,
       jsxs: prod.jsxs,
     })
-    .processSync(article).result;
+    .processSync(articles[`../contents/${year}-${term}.md`]).result;
 
   return (
     <PageWrapper title={title} path={`/class-impression/${id}`}>

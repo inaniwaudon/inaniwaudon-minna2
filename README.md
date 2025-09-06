@@ -15,6 +15,16 @@ yarn run dev
 yarn run build
 ```
 
+## コンテンツの更新
+
+一部コンテンツは、[cmsr2](https://github.com/inaniwaudon/cmsr2) を用いて管理します。
+
+以下のスクリプトを実行してコミットするか、workflow（`prebuild.yml`）を実行することにより、内容を更新します。
+
+```bash
+npx tsx script/prebuild.ts
+```
+
 ## 写真の更新
 
 WebP 形式に圧縮した上で、Cloudflare R2 にアップロードし、メタデータを JSON ファイルとして管理します。
@@ -35,7 +45,8 @@ WebP 形式に圧縮した上で、Cloudflare R2 にアップロードし、メ�
 
 2. 生成された画像ファイルを `/public/$foo` に移動させる
 
-3. http://localhost:3000/:key/add?dir=/foo にアクセスしてタイトルおよび場所を入力する。入力が完了したら JSON を出力し、内容を `$key.json` とマージする
+3. http://localhost:3000/:key/add?dir=/foo にアクセスしてタイトルおよび場所を入力する。
+入力が完了したら JSON を出力し、内容を `$key.json` とマージする
 
 4. 画像を `s3://site-photos/photo/$key` と同期する
 
