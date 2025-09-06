@@ -17,7 +17,7 @@ const fetchData = async <T>(path: string) => {
 };
 
 const classImpression = async () => {
-  const fetchedDir = "./src/app/class-impression/fetched";
+  const fetchedDir = "./src/app/class-impression/contents";
   if (!fs.existsSync(fetchedDir)) {
     fs.mkdirSync(fetchedDir);
   }
