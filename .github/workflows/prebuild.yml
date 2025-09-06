@@ -1,0 +1,45 @@
+name: Prebuild
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Cache Dependency
+        uses: actions/cache@v4
+        id: cache-dependency
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.os }}-${{ hashFiles('yarn.lock') }}
+      - name: Install dependencies
+        if: ${{ steps.cache-dependency.outputs.cache-hit != 'true' }}
+        run: yarn install --frozen-lockfile
+      - name: Prebuild
+        run: npx tsx script/prebuild.ts
+        env:
+          CMSR2_TOKEN: ${{ secrets.CMSR2_TOKEN }}
+      - name: Configure Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+      - name: Commit
+        run: |
+          git add -A
+          git diff --cached --quiet || git commit -m "chore: fetched changes"
+      - name: Push
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
