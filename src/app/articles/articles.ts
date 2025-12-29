@@ -383,6 +383,13 @@ const articleZennLinks: ArticleLink[] = [
     date: "2025/06/09",
     tags: ["tech"],
   },
+  {
+    href: "https://zenn.dev/inaniwaudon/articles/fdc0dc7b34563a",
+    title:
+      "LaTeX で「どの単語を削ればページ内に収まるか」を可視化するスクリプト",
+    date: "2025/12/17",
+    tags: ["tech"],
+  },
 ];
 
 const articleNoteLinks: ArticleLink[] = [
@@ -399,6 +406,12 @@ const articleNoteLinks: ArticleLink[] = [
       "まんがタイムきららの「写植」を読む――吹き出しにみる漫画書体の使い分け",
     date: "2023/01/29",
     tags: ["hongoshi", "design"],
+  },
+  {
+    href: "https://note.com/soudakyoto_ikou/n/n84e13b982860",
+    title: "漫画翻訳サービスを支える組版エンジンの開発",
+    date: "2025/08/18",
+    tags: ["tech"],
   },
 ];
 
@@ -539,6 +552,28 @@ const articleOthersLinks: ArticleLink[] = [
     date: "2025/05/25",
     description: "アドビアプリ自動化もくもく会 #3",
     tags: ["tech", "design", "speaking"],
+  },
+  {
+    href: "",
+    title: "HCIカーソル探訪",
+    date: "2025/11/02",
+    description: "驚額の殿堂 技術同人誌『フランクフルト』",
+    tags: ["tech"],
+  },
+  {
+    href: "https://www.iplab.cs.tsukuba.ac.jp/paper/international/wada_SUI2025.pdf",
+    title:
+      "Flick-in: Japanese Text Entry Method for Indirect Touch Using Bezel-Initiated Swipe",
+    date: "2025/11/10",
+    description: "SUI '25",
+    tags: ["tech"],
+  },
+  {
+    href: "https://www.wiss.org/WISS2025Proceedings/data/demo/2-C24.pdf",
+    title: "VR 環境内でのスマートフォン UI 操作のための間接タッチジェスチャ",
+    date: "2025/12/03",
+    description: "WISS 2025",
+    tags: ["tech"],
   },
 ];
 
