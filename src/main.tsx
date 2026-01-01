@@ -7,6 +7,7 @@ import "./globals.css";
 import NotFound from "./app/404/Index.tsx";
 import About from "./app/about/Index.tsx";
 import Article2024 from "./app/articles/2024/Index.tsx";
+import Article2025 from "./app/articles/2025/Index.tsx";
 import Articles from "./app/articles/Index.tsx";
 import Diary from "./app/articles/diary/Index.tsx";
 import Max from "./app/articles/max/Index.tsx";
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
   {
     path: "/articles/2024",
     element: <Article2024 />,
+  },
+  {
+    path: "/articles/2025",
+    element: <Article2025 />,
   },
   {
     path: "/articles/diary",
