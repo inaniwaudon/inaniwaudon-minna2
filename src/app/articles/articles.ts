@@ -575,6 +575,13 @@ const articleOthersLinks: ArticleLink[] = [
     description: "WISS 2025",
     tags: ["tech"],
   },
+  {
+    href: "/articles/2025",
+    title: "2025 年を振り返って",
+    date: "2025/12/31",
+    description: "いなにわうどん.みんな",
+    tags: ["random"],
+  },
 ];
 
 export const articleLinks = (() => {
