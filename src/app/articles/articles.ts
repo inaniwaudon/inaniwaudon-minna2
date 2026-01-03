@@ -176,6 +176,12 @@ const articleHatenaLinks: ArticleLink[] = [
     date: "2025/06/01",
     tags: ["random"],
   },
+  {
+    href: "https://soudakyoto-ikou.hatenadiary.jp/entry/20260103/1767415641",
+    title: "バタバタの冬コミ初サークル参加記",
+    date: "2026/01/03",
+    tags: ["random"],
+  },
 ];
 
 const articleZennLinks: ArticleLink[] = [
@@ -581,6 +587,49 @@ const articleOthersLinks: ArticleLink[] = [
     date: "2025/12/31",
     description: "いなにわうどん.みんな",
     tags: ["random"],
+  },
+  {
+    href: "https://inaniwaudon.booth.pm/items/7828487",
+    title: "絶対フォント感を身に付けるには？",
+    date: "2025/12/31",
+    description: "組版技術 Vol. 1",
+    tags: ["tech"],
+  },
+  {
+    href: "https://inaniwaudon.booth.pm/items/7828487",
+    title: "スマートウォッチと日本語入力",
+    date: "2025/12/31",
+    description: "組版技術 Vol. 1",
+    tags: ["tech"],
+  },
+  {
+    href: "https://inaniwaudon.booth.pm/items/7828487",
+    title: "二段組の組版技術",
+    date: "2025/12/31",
+    description: "組版技術 Vol. 1",
+    tags: ["tech"],
+  },
+  {
+    href: "https://inaniwaudon.booth.pm/items/7828487",
+    title: "JL/CL/KLreq 読み比べ",
+    date: "2025/12/31",
+    description: "組版技術 Vol. 1",
+    tags: ["tech"],
+  },
+  {
+    href: "https://inaniwaudon.booth.pm/items/7828487",
+    title:
+      "LaTeX で「どの単語・行を削ればページ内に収まるか」を可視化するスクリプト",
+    date: "2025/12/31",
+    description: "組版技術 Vol. 1",
+    tags: ["tech"],
+  },
+  {
+    href: "https://inaniwaudon.booth.pm/items/7828487",
+    title: "組版システムがみた夢",
+    date: "2025/12/31",
+    description: "組版技術 Vol. 1",
+    tags: ["tech"],
   },
 ];
 
