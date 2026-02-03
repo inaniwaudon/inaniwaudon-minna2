@@ -5,7 +5,7 @@ import PageTitle from "@/components/common/PageTitle";
 import PageWrapper from "@/components/common/PageWrapper";
 import { diaryItems } from "./text";
 
-const title = "日記";
+const title = "日報";
 
 const Main = styled.main`
   max-width: 800px;
@@ -43,7 +43,7 @@ const Index = () => {
   return (
     <PageWrapper title={title} path="/articles">
       <Main>
-        <PageTitle>日記</PageTitle>
+        <PageTitle>日報</PageTitle>
         {diaryItems.map(({ date, body, photo }) => (
           <div key={date}>
             <H3>{date}</H3>

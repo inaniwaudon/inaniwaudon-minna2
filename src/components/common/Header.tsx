@@ -112,7 +112,7 @@ const items: { title: string; href: string }[] = [
     href: "/nerene",
   },
   {
-    title: "日記",
+    title: "日報",
     href: "/articles/diary",
   },
   {
