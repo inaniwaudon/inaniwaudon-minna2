@@ -16,7 +16,7 @@ export const diaryItems = (() => {
       .filter((line) => line.length > 0);
 
     for (const line of lines) {
-      if (line.match(/^\d{4}\/\d{1,2}/) || line.match(/^.+のふりかえり/)) {
+      if (line.match(/^\d{4}\/\d{1,2}/) || line.match(/^.+のふりかえり$/)) {
         items.push({ date: line, body: "" });
       } else {
         if (line.startsWith("!")) {
