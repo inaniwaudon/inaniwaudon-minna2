@@ -294,7 +294,7 @@ const Main = () => {
               <Anchor href="/nerene">ネレネー山脈</Anchor>
             </li>
             <li>
-              <Anchor href="/articles/diary">日記</Anchor>
+              <Anchor href="/articles/diary">日報</Anchor>
             </li>
             <li>
               <Anchor href="/class-impression">授業感想</Anchor>
