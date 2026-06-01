@@ -391,7 +391,7 @@ const Main = () => {
               <img src={fuwafuwa} alt="" />
               ふわふわ.みんな
             </CrossLink>
-            <CrossLink href="https://raspi0124.dev/">
+            <CrossLink href="https://raspi0124.dev">
               <img src={raspi0124} alt="" />
               raspi0124.dev
             </CrossLink>
