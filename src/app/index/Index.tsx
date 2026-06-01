@@ -14,6 +14,7 @@ import fuwafuwa from "@/assets/index/links/fuwafuwa.webp";
 import iorinio from "@/assets/index/links/iorin-io.webp";
 import itsudev from "@/assets/index/links/itsu-dev.svg";
 import nakaya from "@/assets/index/links/nakaya.webp";
+import raspi0124 from "@/assets/index/links/raspi0124.webp";
 
 import Anchor, { linkColor } from "@/components/common/Anchor";
 import AnchorListItem from "@/components/common/AnchorListItem";
@@ -142,13 +143,22 @@ const PhotoThumbnail = styled.div<{ src?: string }>`
 `;
 
 const CrossLinks = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 96px);
+  gap: 24px 32px;
   justify-content: center;
-  flex-wrap: wrap;
-  gap: 24px;
+
+  @media (width < calc(96px * 3 + 32px * 2 + 32px * 2)) {
+    grid-template-columns: repeat(2, 96px);
+  }
+
+  @media (width < calc(96px * 2 + 32px + 32px * 2)) {
+    grid-template-columns: 96px;
+  }
 `;
 
 const CrossLink = styled.a`
+  width: 96px;
   line-height: 1.2;
   color: ${linkColor};
   text-decoration: none;
@@ -163,8 +173,8 @@ const CrossLink = styled.a`
   }
 
   img {
-    width: 96px;
-    height: 96px;
+    width: 94px;
+    height: 94px;
     border: solid 1px #ccc;
     border-radius: 50%;
     margin-bottom: 8px;
@@ -355,7 +365,7 @@ const Main = () => {
               <img src={iorinio} alt="" />
               iorin.io
             </CrossLink>
-            <CrossLink href="https://charlotteace.github.io">
+            <CrossLink href="https://charlotteace.jp">
               <img src={charlotteace} alt="" />
               シャーロット
               <br />
@@ -380,6 +390,10 @@ const Main = () => {
             <CrossLink href="https://ふわふわ.みんな">
               <img src={fuwafuwa} alt="" />
               ふわふわ.みんな
+            </CrossLink>
+            <CrossLink href="https://raspi0124.dev/">
+              <img src={raspi0124} alt="" />
+              raspi0124.dev
             </CrossLink>
           </CrossLinks>
           <Bunner>
