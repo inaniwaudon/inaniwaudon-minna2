@@ -1,10 +1,10 @@
 import styled from "@emotion/styled";
 
+import Anchor from "@/components/common/Anchor";
 import H3 from "@/components/common/H3";
 import PageTitle from "@/components/common/PageTitle";
 import PageWrapper from "@/components/common/PageWrapper";
-import { diaryItems, Photo, PhotoWrapper, renderBody } from "./utils";
-import Anchor from "@/components/common/Anchor";
+import { Photo, PhotoWrapper, diaryItems, renderBody } from "./utils";
 
 const title = "日報";
 
@@ -18,7 +18,9 @@ const Index = () => {
     <PageWrapper title={title} path="/articles">
       <Main>
         <PageTitle>日報</PageTitle>
-        <p style={{ marginBottom: "24px"}}><Anchor href="/articles/diary/compare">3 年分の比較</Anchor></p>
+        <p style={{ marginBottom: "24px" }}>
+          <Anchor href="/articles/diary/compare">3 年分の比較</Anchor>
+        </p>
         {diaryItems.map(({ date, body, photo }) => (
           <div key={date}>
             <H3>{date}</H3>
