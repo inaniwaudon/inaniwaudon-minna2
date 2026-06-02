@@ -2,7 +2,6 @@ import styled from "@emotion/styled";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
 
-import Anchor from "@/components/common/Anchor";
 import H3 from "@/components/common/H3";
 import {
   type DiaryItem,
