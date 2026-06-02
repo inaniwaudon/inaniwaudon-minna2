@@ -5,6 +5,7 @@ import text2025 from "./2025.txt?raw";
 import text2026 from "./2026.txt?raw";
 
 export const Paragraph = styled.p`
+  overflow-wrap: break-word;
   margin: 0 0 12px 0;
 `;
 
@@ -85,7 +86,9 @@ export const renderBody = (body: string) => {
 
   const flushText = () => {
     if (textLines.length > 0) {
-      nodes.push(<Paragraph key={nodes.length}>{textLines.join("")}</Paragraph>);
+      nodes.push(
+        <Paragraph key={nodes.length}>{textLines.join("")}</Paragraph>,
+      );
       textLines = [];
     }
   };
@@ -94,8 +97,10 @@ export const renderBody = (body: string) => {
     if (listItems.length > 0) {
       nodes.push(
         <DiaryList key={nodes.length}>
-          {listItems.map((item, i) => <li key={i}>{item}</li>)}
-        </DiaryList>
+          {listItems.map((item, i) => (
+            <li key={i}>{item}</li>
+          ))}
+        </DiaryList>,
       );
       listItems = [];
     }
