@@ -12,13 +12,6 @@ import {
   renderBody,
 } from "../utils";
 
-const Flow = styled.div`
-  position: fixed;
-  left: 28px;
-  bottom: 20px;
-  z-index: 10;
-`;
-
 const Columns = styled.div`
   height: 100dvh;
   display: flex;
@@ -316,7 +309,7 @@ const DiaryColumn = ({
 const Index = () => {
   const [activeColumn, setActiveColumn] = useState(0);
   const [activeDateKey, setActiveDateKey] = useState(() => {
-    const first = WINDOW_ITEMS[0][0];
+    const first = PERIOD_ITEMS[0][0];
     return first ? getDateKey(first.date) : "1/1";
   });
 
@@ -325,9 +318,6 @@ const Index = () => {
       <Helmet>
         <title>日報（3年分の比較）｜いなにわうどん.みんな</title>
       </Helmet>
-      <Flow>
-        <Anchor href="/articles/diary">日報に戻る</Anchor>
-      </Flow>
       <Columns>
         {PERIODS.map((period, i) => (
           <DiaryColumn
