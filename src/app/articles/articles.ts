@@ -633,10 +633,18 @@ const articleOthersLinks: ArticleLink[] = [
   },
   {
     href: "https://www.iplab.cs.tsukuba.ac.jp/paper/international/wada_CHIEA2026.pdf",
-    title: "Exploring Indirect Touch Gestures for Smartphone Interaction within VR Environments",
+    title:
+      "Exploring Indirect Touch Gestures for Smartphone Interaction within VR Environments",
     date: "2026/04/13",
     description: "CHI EA '26",
     tags: ["tech"],
+  },
+  {
+    href: "/articles/opinion2",
+    title: "多事争論 2（ツー）",
+    date: "2026/07/18",
+    description: "いなにわうどん.みんな",
+    tags: ["random"],
   },
 ];
 
