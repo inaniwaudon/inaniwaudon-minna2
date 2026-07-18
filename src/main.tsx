@@ -12,6 +12,7 @@ import Articles from "./app/articles/Index.tsx";
 import Diary from "./app/articles/diary/Index.tsx";
 import DiaryCompare from "./app/articles/diary/compare/Index.tsx";
 import Max from "./app/articles/max/Index.tsx";
+import Opinion2 from "./app/articles/opinion2/Index.tsx";
 import AuthCallback from "./app/auth/callback/Index.tsx";
 import AuthSignout from "./app/auth/signout/Index.tsx";
 import ClassImpression from "./app/class-impression/Index.tsx";
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
   {
     path: "/articles/diary/compare",
     element: <DiaryCompare />,
+  },
+  {
+    path: "/articles/opinion2",
+    element: <Opinion2 />,
   },
   {
     path: "/articles/max",
