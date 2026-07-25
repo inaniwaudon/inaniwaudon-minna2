@@ -20,9 +20,8 @@
     "noUncheckedSideEffectImports": true,
 
     "jsxImportSource": "@emotion/react",
-    "baseUrl": "./",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["./src/*"]
     }
   },
   "include": ["vite.config.ts"]

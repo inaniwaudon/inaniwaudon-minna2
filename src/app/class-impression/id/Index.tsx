@@ -12,9 +12,10 @@ import PageWrapper from "@/components/common/PageWrapper";
 import classImpressions from "../contents/index.json";
 
 const articles = import.meta.glob("../contents/*.md", {
-  as: "raw",
+  query: "?raw",
   eager: true,
-});
+  import: "default",
+}) as Record<string, string>;
 
 const Wrapper = styled.div`
   max-width: 1000px;
