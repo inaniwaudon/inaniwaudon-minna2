@@ -22,6 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+tsconfig.node.tsbuildinfo
 
 public/feed
 /photos/

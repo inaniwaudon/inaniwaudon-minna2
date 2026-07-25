@@ -3,7 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { ArgumentParser } from "argparse";
 import exif from "exif-reader";
-import { glob } from "glob";
+import { globSync } from "glob";
 import natsort, { type OptionsType } from "natsort";
 import sharp, { type Sharp } from "sharp";
 
@@ -136,9 +136,9 @@ const createPhotos = async (args: InputArguments) => {
   const jpegPath = path.join(args.input_dir, "*.jpeg");
   const pngPath = path.join(args.input_dir, "*.png");
   const imgPaths = [
-    ...glob.sync(jpgPath),
-    ...glob.sync(jpegPath),
-    ...glob.sync(pngPath),
+    ...globSync(jpgPath),
+    ...globSync(jpegPath),
+    ...globSync(pngPath),
   ].sort((a, b) => naturalsort()(a, b));
 
   const photoInfos: PhotoInfo[] = [];
