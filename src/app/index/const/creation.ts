@@ -17,16 +17,12 @@ export const creations: Creation[] = [
     url: "https://github.com/inaniwaudon/clipshort",
   },
   {
-    title: "twitter-illustration",
-    url: "https://github.com/inaniwaudon/twitter-illustration",
+    title: "tsurumi.yokohama.dev",
+    url: "https://tsurumi.yokohama.dev",
   },
   {
     title: "illustrator-ruby",
     url: "https://github.com/inaniwaudon/illustrator-ruby",
-  },
-  {
-    title: "illustrator-text",
-    url: "https://github.com/inaniwaudon/illustrator-text",
   },
   {
     title: "parametric-typography",
@@ -56,7 +52,10 @@ export const creations: Creation[] = [
     title: "URL 延長サービス",
     url: "https://extend-url.yokohama.dev",
   },
-  {
+  /*{
+    title: "twitter-illustration",
+    url: "https://github.com/inaniwaudon/twitter-illustration",
+  },{
     title: "public-pizza",
     url: "https://github.com/inaniwaudon/public-pizza",
   },
@@ -72,4 +71,8 @@ export const creations: Creation[] = [
     title: "cmap-display",
     url: "https://cmap-display.pages.dev",
   },
+  {
+    title: "illustrator-text",
+    url: "https://github.com/inaniwaudon/illustrator-text",
+  },*/
 ];

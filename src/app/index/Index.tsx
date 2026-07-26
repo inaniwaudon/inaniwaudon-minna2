@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Helmet } from "react-helmet-async";
 
 import { photos } from "@/app/photos/const";
@@ -105,14 +105,15 @@ const Photos = styled.div`
   gap: 16px;
 `;
 
-const PhotoThumbnail = styled.div<{ src?: string }>`
+const PhotoThumbnail = styled.div<{ src?: string; story?: boolean }>`
   height: 200px;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   flex: calc((100% - 16px) / 2) 0 0;
   background-color: #999;
   background-image: url(${(props) => props.src});
-  background-size: cover;
+  background-size: ${({ story }) => (story ? "100% auto" : "cover")};
+  background-position: center;
   transition: transform 0.2s ease;
 
   &:hover {
@@ -141,6 +142,25 @@ const PhotoThumbnail = styled.div<{ src?: string }>`
     font-size: 0.8rem;
   }
 `;
+
+const PhotoCard = ({
+  photoKey,
+  title,
+  date,
+  photoSrc,
+}: {
+  photoKey: string;
+  title: string;
+  date: string;
+  photoSrc: string;
+}) => (
+  <PhotoThumbnail src={`${getPhotoDir(photoKey)}/thumbnail/${photoSrc}`}>
+    <a href={`/photos/${photoKey}`}>
+      <h3>{title}</h3>
+      <time>{date}</time>
+    </a>
+  </PhotoThumbnail>
+);
 
 const CrossLinks = styled.div`
   display: grid;
@@ -190,6 +210,17 @@ const Bunner = styled.div`
 `;
 
 const Main = () => {
+  const [storyImageUrl, setStoryImageUrl] = useState<string | undefined>(
+    undefined,
+  );
+
+  useEffect(() => {
+    fetch("https://tsurumi.yokohama.dev/api/random-image")
+      .then((res) => res.text())
+      .then((url) => setStoryImageUrl(url))
+      .catch(() => {});
+  }, []);
+
   const photoLinks = useMemo(
     () =>
       photos
@@ -236,16 +267,26 @@ const Main = () => {
             <a href="/photos">写真</a>
           </H2>
           <Photos>
-            {photoLinks.map(({ key, title, date, photo }) => (
-              <PhotoThumbnail
-                src={`${getPhotoDir(key)}/thumbnail/${photo.src}`}
-                key={title}
-              >
-                <a href={`/photos/${key}`}>
-                  <h3>{title}</h3>
-                  <time>{date}</time>
-                </a>
-              </PhotoThumbnail>
+            <PhotoCard
+              photoKey={photoLinks[0].key}
+              title={photoLinks[0].title}
+              date={photoLinks[0].date}
+              photoSrc={photoLinks[0].photo.src}
+            />
+            <PhotoThumbnail src={storyImageUrl} story>
+              <a href="https://tsurumi.yokohama.dev">
+                <h3>Instagram</h3>
+                <time>2019–</time>
+              </a>
+            </PhotoThumbnail>
+            {photoLinks.slice(1).map(({ key, title, date, photo }) => (
+              <PhotoCard
+                key={key}
+                photoKey={key}
+                title={title}
+                date={date}
+                photoSrc={photo.src}
+              />
             ))}
           </Photos>
         </Content>
