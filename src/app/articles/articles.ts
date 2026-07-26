@@ -560,7 +560,7 @@ const articleOthersLinks: ArticleLink[] = [
     tags: ["tech", "design", "speaking"],
   },
   {
-    href: "",
+    href: "https://booth.pm/ja/items/7735616",
     title: "HCIカーソル探訪",
     date: "2025/11/02",
     description: "驚額の殿堂 技術同人誌『フランクフルト』",

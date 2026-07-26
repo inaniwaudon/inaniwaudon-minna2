@@ -30,6 +30,9 @@ export const main = () => {
   const feed = new Feed(feedOptions);
 
   for (const link of articleLinks) {
+    if (!link.href) {
+      continue;
+    }
     const href = link.href.startsWith("/")
       ? `${baseUrl}${link.href}`
       : link.href;
