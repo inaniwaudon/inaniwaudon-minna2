@@ -3,24 +3,25 @@ import { Feed, type FeedOptions } from "feed";
 
 import { articleLinks } from "../src/app/articles/articles";
 
+const baseUrl = "https://いなにわうどん.みんな";
 const directory = "feed";
 const path = "public/feed";
 
 export const feedOptions: FeedOptions = {
   title: "いなにわうどん.みんな",
   description: "書いたもの・こと",
-  id: "https://いなにわうどん.みんな",
-  link: "https://いなにわうどん.みんな",
+  id: baseUrl,
+  link: baseUrl,
   feedLinks: {
-    atom: `https://いなにわうどん.みんな/${directory}/atom.xml`,
-    rss2: `https://いなにわうどん.みんな/${directory}/feed.xml`,
-    json: `https://いなにわうどん.みんな/${directory}/feed.json`,
+    atom: `${baseUrl}/${directory}/atom.xml`,
+    rss2: `${baseUrl}/${directory}/feed.xml`,
+    json: `${baseUrl}/${directory}/feed.json`,
   },
   copyright: "(c) いなにわうどん",
   language: "ja",
   author: {
     name: "いなにわうどん",
-    link: "https://いなにわうどん.みんな",
+    link: baseUrl,
     email: "me@yokohama.dev",
   },
 };
@@ -29,12 +30,15 @@ export const main = () => {
   const feed = new Feed(feedOptions);
 
   for (const link of articleLinks) {
+    const href = link.href.startsWith("/")
+      ? `${baseUrl}${link.href}`
+      : link.href;
     feed.addItem({
       title: link.title,
       description: "",
       date: new Date(link.date),
-      id: link.href,
-      link: link.href,
+      id: href,
+      link: href,
     });
   }
 
