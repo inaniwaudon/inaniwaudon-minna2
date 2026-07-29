@@ -1,6 +1,5 @@
-import styled from "@emotion/styled";
-
 import { keyframes } from "@emotion/react";
+import styled from "@emotion/styled";
 import { useMemo, useState } from "react";
 import Anchor from "./Anchor";
 import CustomList from "./CustomList";
@@ -15,6 +14,7 @@ const Wrapper = styled.header<{ opened: boolean }>`
   left: 0;
   overflow: hidden;
   transition: width 200ms;
+  z-index: 1000;
 
   * {
     display: ${({ opened }) => (!opened ? "none" : "")};
@@ -36,6 +36,7 @@ const Border = styled.div`
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 10000;
 `;
 
 const ListItem = styled.li`

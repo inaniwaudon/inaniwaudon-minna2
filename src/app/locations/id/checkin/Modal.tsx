@@ -6,8 +6,8 @@ import { fetchPlaces } from "../../lib/api";
 import {
   type FoursquareOriginalPlace,
   type FoursquarePlace,
-  Loading,
   getCurrentPosition,
+  Loading,
 } from "../../lib/utils";
 import ModalHeader from "./ModalHeader";
 
