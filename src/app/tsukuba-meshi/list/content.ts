@@ -27,7 +27,7 @@ export type RestaurantContent =
   | ClosedRestaurant
   | UnknownRestaurant;
 
-export const openedRestaurants: Record<string, OpenedRestaurant> = {
+export const openedRestaurants = {
   "ALPACA DINING": {
     address: "天久保2丁目3–1",
     mapsUrl:
@@ -85,14 +85,14 @@ export const openedRestaurants: Record<string, OpenedRestaurant> = {
     lng: 140.1062332,
   },
   "中華そば JUN-CHAN": {
-    address: "竹園2丁目10–1 第4 柴原ビル 1F",
+    address: "竹園2丁目10–1 第4柴原ビル 1F",
     mapsUrl:
       "https://www.google.com/maps/place/?q=place_id:ChIJnx5ZLvMMImARrxkxGahZAZw",
     lat: 36.0785685,
     lng: 140.1219559,
   },
   "カレーうどん ZEYO.": {
-    address: "天久保2丁目6–1 ベスト ランド Ⅳ 1F",
+    address: "天久保2丁目6–1 ベストランドⅣ 1F",
     mapsUrl:
       "https://www.google.com/maps/place/?q=place_id:ChIJqTB5XwsMImARm-aXNfHMpo8",
     lat: 36.0980832,
@@ -211,7 +211,7 @@ export const openedRestaurants: Record<string, OpenedRestaurant> = {
     lng: 140.1157722,
   },
   "茨城地のもの わらやき料理 たたきの一九 @つくば店": {
-    address: "吾妻1丁目8–10 Biviつくば 3F",
+    address: "吾妻1丁目8–10 BiViつくば 3F",
     mapsUrl:
       "https://www.google.com/maps/place/?q=place_id:ChIJkXYjYb0NImARCO2hAgoTyBM",
     lat: 36.08162009999999,
@@ -414,7 +414,7 @@ export const openedRestaurants: Record<string, OpenedRestaurant> = {
     lng: 140.1085475,
   },
   "カフェ マルハバン": {
-    address: "天王台1丁目1–1 第二エリア 2B棟1F",
+    address: "天王台1丁目1–1 第二エリア 2B棟 1F",
     mapsUrl:
       "https://www.google.com/maps/place/?q=place_id:ChIJ9Xq_fQAMImARHfYIJuT1Qvg",
     lat: 36.1112739,
@@ -848,7 +848,7 @@ export const openedRestaurants: Record<string, OpenedRestaurant> = {
     lng: 140.103246,
   },
   千里: {
-    address: "吾妻3丁目13–9 1F-B",
+    address: "吾妻3丁目13–9 1F",
     mapsUrl:
       "https://www.google.com/maps/place/?q=place_id:ChIJYQ25XccNImARehGFjnv2tWA",
     lat: 36.0896379,
@@ -988,7 +988,7 @@ export const openedRestaurants: Record<string, OpenedRestaurant> = {
     lng: 140.1201258,
   },
   本部棟レストラン: {
-    address: "天久保1丁目1–1 本部棟",
+    address: "天王台1丁目1–1 本部棟",
     mapsUrl:
       "https://www.google.com/maps/place/?q=place_id:ChIJF9rXPQEMImARPxjpwht943M",
     lat: 36.1116034,
@@ -1407,9 +1407,9 @@ export const openedRestaurants: Record<string, OpenedRestaurant> = {
     lat: 36.0891525,
     lng: 140.1103101,
   },
-};
+} as const satisfies Record<string, OpenedRestaurant>;
 
-export const closedRestaurants: Record<string, ClosedRestaurant> = {
+export const closedRestaurants = {
   RanRan: { closed: true },
   "WIKIWIKI: ハンバーガ": { closed: true },
   "エルトリート @つくば学園店: メキシコ料理": { closed: true },
@@ -1451,9 +1451,63 @@ export const closedRestaurants: Record<string, ClosedRestaurant> = {
     lng: 140.0859947,
     closed: true,
   },
-};
+  アヤカリ亭: { closed: true },
+} as const satisfies Record<string, ClosedRestaurant>;
 
-export const restaurantContents: Record<string, RestaurantContent> = {
+export const unknownRestaurants = {
+  "俺の生きる道 @つくば店": {},
+  "横浜家系ラーメン 魂心家 @つくば店": {},
+  "煮干中華ソバ イチカワ": {},
+  "中華そば 騰匠俐": {},
+  中華そばビート: {},
+  "味噌のジョー @つくば本店 ": {},
+  "ゆきむら亭 つくば西店": {},
+  "麺処 明り": {},
+  屋台ラーメン桜: {},
+  麺や小五郎: {},
+  ららららーめんや: {},
+  らーめんICHI: {},
+  "麺屋 湯火": {},
+  豚飯坊屋: {},
+  "かつ太郎本店 つくば学園店": {},
+  "おそば 増田屋": {},
+  "つくば蕎麦物語 一成": {},
+  桃ちゃん弁当: {},
+  とんかつ弁当かつ大: {},
+  おふくろさん弁当: {},
+  "本格韓国料理 BabSang（バブサン）: 韓国料理": {},
+  "Spice curry TRIGGER": {},
+  ストリートス: {},
+  "kalak（カラク）": {},
+  "韓国料理 炭火焼肉 ハンアリ": {},
+  "焼肉 平城苑 つくば学園店": {},
+  "串かつ でんがな BiViつくば店": {},
+  "naked bar": {},
+  "東京バル GardenTerrace": {},
+  "しゃぶ葉 つくば店": {},
+  "びっくりドンキー @つくば中央店": {},
+  ばんどう太郎つくば学園店: {},
+  "和食さと つくば店": {},
+  "モスバーガー @つくば中央店": {},
+  "ケンタッキーフライドチキン @筑波学園店": {},
+  "カレーハウス CoCo壱番屋 @つくば桜店": {},
+  "moi!kka（モイッカ）": {},
+  "スターバックスコーヒー @筑波大学中央図書館店": {},
+  "スぺシャルティコーヒー豆専門店 トライブ": {},
+  "豆ぽっ自家焙煎珈琲 まめぽっと": {},
+  "SORA CAFE & COOKING ROOM": {},
+  SugayaCoffee: {},
+  "カフェ クレマチス": {},
+  "N's cafe": {},
+  "千年一日珈琲焙煎所 Cafe": {},
+  "Rainbow cafe @つくば店": {},
+  "コナズ珈琲 つくば店": {},
+  スープファクトリー: {},
+  "カラオケレインボー @つくば店": {},
+} as const satisfies Record<string, UnknownRestaurant>;
+
+export const restaurantContents = {
   ...openedRestaurants,
   ...closedRestaurants,
+  ...unknownRestaurants,
 };

@@ -34,6 +34,8 @@ const Index = () => {
         <PageTitle>{title}</PageTitle>
         <p>{description}</p>
 
+        <Anchor href="/tsukuba-meshi/list">つくば飲食店リスト・地図</Anchor>
+
         <H2>2024 年度版</H2>
         <p>画像クリックで拡大します</p>
         <ImageWrapper>

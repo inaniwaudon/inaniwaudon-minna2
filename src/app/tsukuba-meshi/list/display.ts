@@ -1,5 +1,7 @@
+import type { restaurantContents } from "./content";
+
 export type RestaurantEntry = {
-  name: string;
+  name: keyof typeof restaurantContents;
   starred?: true;
   unvisited?: true;
 };
@@ -65,7 +67,7 @@ export const genres: Genre[] = [
           { name: "松屋製麺所", starred: true },
           { name: "松屋食堂", starred: true },
           { name: "麺屋 必道", starred: true },
-          { name: "イチカワ", starred: true },
+          { name: "煮干中華ソバ イチカワ", starred: true },
           { name: "いっとく", starred: true },
           { name: "らぁめん 喜乃壺（きのこ）" },
           { name: "喜元門 @研究学園店" },
@@ -342,7 +344,7 @@ export const genres: Genre[] = [
           { name: "カンビオ", unvisited: true },
           { name: "wine stand 43ponte", unvisited: true },
           { name: "naked bar", unvisited: true },
-          { name: "東京バルGardenTerrace", unvisited: true },
+          { name: "東京バル GardenTerrace", unvisited: true },
         ],
       },
       {
@@ -434,7 +436,7 @@ export const genres: Genre[] = [
       { name: "N's cafe", unvisited: true },
       { name: "千年一日珈琲焙煎所 Cafe", unvisited: true },
       { name: "Rainbow cafe @つくば店", unvisited: true },
-      { name: "コナズ珈琲つくば", unvisited: true },
+      { name: "コナズ珈琲 つくば店", unvisited: true },
     ],
   },
   {

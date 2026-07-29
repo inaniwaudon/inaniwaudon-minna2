@@ -11,6 +11,9 @@ import { restaurantContents } from "./content";
 import type { RestaurantEntry } from "./display";
 import { genres } from "./display";
 
+const keyColor = "#4285f4";
+const starColor = "#e08020";
+
 const Main = styled.main`
   max-width: 800px;
   line-height: 1.8;
@@ -18,20 +21,37 @@ const Main = styled.main`
 
 const TabBar = styled.div`
   display: flex;
+  align-items: center;
   margin-bottom: 16px;
-  border-bottom: 2px solid #e0e0e0;
+  border-bottom: 2px solid #ddd;
 `;
 
 const Tab = styled.button<{ $active: boolean }>`
-  color: ${({ $active }) => ($active ? "#4285f4" : "#888")};
+  color: ${({ $active }) => ($active ? keyColor : "#666")};
   font-size: 14px;
   margin-bottom: -2px;
   padding: 6px 40px;
   border: none;
-  border-bottom: 2px solid ${({ $active }) => ($active ? "#4285f4" : "transparent")};
+  border-bottom: 2px solid ${({ $active }) => ($active ? keyColor : "transparent")};
   background: none;
   cursor: pointer;
   font-weight: ${({ $active }) => ($active ? "bold" : "normal")};
+`;
+
+const RandomButton = styled.button`
+  color: #fff;
+  font-size: 15px;
+  padding: 8px 24px 10px 24px;
+  border-radius: 8px;
+  background: ${keyColor};
+  cursor: pointer;
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+
+  &:hover {
+    opacity: 0.8;
+  }
 `;
 
 const MapWrapper = styled.div`
@@ -40,6 +60,8 @@ const MapWrapper = styled.div`
   border-radius: 8px;
   overflow: hidden;
   margin-bottom: 16px;
+  position: relative;
+
   .leaflet-popup-content {
     font-family: inherit;
   }
@@ -72,15 +94,15 @@ const FilterChip = styled.label<{ $checked: boolean }>`
   border-radius: 6px;
   font-size: 14px;
   cursor: pointer;
-  background: ${({ $checked }) => ($checked ? "#4285f4" : "#eee")};
-  color: ${({ $checked }) => ($checked ? "white" : "#555")};
+  background: ${({ $checked }) => ($checked ? keyColor : "#eee")};
+  color: ${({ $checked }) => ($checked ? "white" : "#666")};
 
   input {
     display: none;
   }
 
   &:hover {
-    border-color: #4285f4;
+    border-color: ${keyColor};
   }
 `;
 
@@ -91,31 +113,30 @@ const RestaurantList = styled.ul`
 `;
 
 const RestaurantItem = styled.li<{ closed: boolean }>`
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-  padding: 2px 0;
+  line-height: 1.4;
+  padding: 6px 0;
   opacity: ${({ closed }) => (closed ? 0.6 : 1)};
 `;
 
 const Name = styled.span<{ closed: boolean }>`
   text-decoration: ${({ closed }) => (closed ? "line-through" : "none")};
+  margin-right: 8px;
 `;
 
 const Star = styled.span`
-  color: #e08020;
-  flex-shrink: 0;
+  color: ${starColor};
+  margin-right: 8px;
 `;
 
 const Address = styled.span`
+  color: #666;
   font-size: 13px;
-  color: #888;
-  flex-shrink: 0;
+  margin-right: 8px;
 `;
 
 const MapsLink = styled.a`
   font-size: 12px;
-  color: #4285f4;
+  color: ${keyColor};
   text-decoration: none;
   flex-shrink: 0;
 
@@ -197,7 +218,7 @@ const sortKey = (r: RestaurantEntry) => {
 const sorted = (rs: RestaurantEntry[]) =>
   [...rs].sort((a, b) => sortKey(a) - sortKey(b));
 
-const title = "つくば飲食店リスト";
+const title = "つくば飲食店リスト・地図";
 const description = "筑波大学周辺の飲食店一覧（知っている限り）です．";
 
 const RestaurantRow = ({ restaurant }: { restaurant: RestaurantEntry }) => {
@@ -241,20 +262,52 @@ const Index = () => {
     return selectedAreas.has(getAreaLabel(address));
   };
 
+  const matchesStatus = (restaurant: RestaurantEntry): boolean => {
+    if (!selectedGenres.has("未遂") && !selectedGenres.has("閉店")) {
+      return true;
+    }
+    const closed = !!restaurantContents[restaurant.name]?.closed;
+    if (selectedGenres.has("未遂") && selectedGenres.has("閉店")) {
+      return restaurant.unvisited === true || closed;
+    }
+    if (selectedGenres.has("未遂")) {
+      return restaurant.unvisited === true;
+    }
+    if (selectedGenres.has("閉店")) {
+      return closed;
+    }
+    return true;
+  };
+
+  const selectedNormalGenres = new Set(
+    [...selectedGenres].filter((g) => g !== "未遂" && g !== "閉店"),
+  );
+
   const visibleGenres = genres
-    .filter((g) => selectedGenres.size === 0 || selectedGenres.has(g.name))
+    .filter(
+      (g) =>
+        selectedNormalGenres.size === 0 || selectedNormalGenres.has(g.name),
+    )
     .map((g) => ({
       ...g,
-      restaurants: g.restaurants?.filter(matchesArea),
+      restaurants: g.restaurants?.filter(
+        (r) => matchesArea(r) && matchesStatus(r),
+      ),
       subgenres: g.subgenres
         ?.map((sg) => ({
           ...sg,
-          restaurants: sg.restaurants.filter(matchesArea),
+          restaurants: sg.restaurants.filter(
+            (r) => matchesArea(r) && matchesStatus(r),
+          ),
         }))
         .filter((sg) => sg.restaurants.length > 0),
     }))
     .filter((g) => {
-      if (selectedAreas.size === 0) {
+      if (
+        selectedAreas.size === 0 &&
+        !selectedGenres.has("未遂") &&
+        !selectedGenres.has("閉店")
+      ) {
         return true;
       }
       return (g.restaurants?.length ?? 0) > 0 || (g.subgenres?.length ?? 0) > 0;
@@ -264,6 +317,19 @@ const Index = () => {
     ...(g.restaurants ?? []),
     ...(g.subgenres?.flatMap((sg) => sg.restaurants) ?? []),
   ]);
+
+  const pickRandom = () => {
+    if (visibleRestaurants.length === 0) {
+      alert("該当するお店がありません．");
+      return;
+    }
+    const picked =
+      visibleRestaurants[Math.floor(Math.random() * visibleRestaurants.length)];
+    const content = restaurantContents[picked.name];
+    const star = picked.starred ? " ★" : "";
+    const address = content?.address ? `\n${content.address}` : "";
+    alert(`${picked.name}${star}${address}`);
+  };
 
   return (
     <PageWrapper
@@ -294,6 +360,18 @@ const Index = () => {
                   {g.name}
                 </FilterChip>
               ))}
+              {["未遂", "閉店"].map((label) => (
+                <FilterChip key={label} $checked={selectedGenres.has(label)}>
+                  <input
+                    type="checkbox"
+                    checked={selectedGenres.has(label)}
+                    onChange={() =>
+                      setSelectedGenres((prev) => toggleSet(prev, label))
+                    }
+                  />
+                  {label}
+                </FilterChip>
+              ))}
             </FilterGenre>
           </div>
           <div>
@@ -316,11 +394,12 @@ const Index = () => {
         </FilterSection>
         <TabBar>
           <Tab $active={view === "list"} onClick={() => setView("list")}>
-            リスト（{visibleRestaurants.length}店）
+            リスト（{visibleRestaurants.length} 店）
           </Tab>
           <Tab $active={view === "map"} onClick={() => setView("map")}>
             地図
           </Tab>
+          <RandomButton onClick={pickRandom}>ランダムで選ぶ</RandomButton>
         </TabBar>
         {view === "map" && (
           <MapWrapper>
@@ -340,8 +419,8 @@ const Index = () => {
                 const color = closed
                   ? "#bbb"
                   : restaurant.starred
-                    ? "#e08020"
-                    : "#4285f4";
+                    ? starColor
+                    : keyColor;
                 const suffix = closed
                   ? "（閉店）"
                   : restaurant.unvisited
@@ -369,7 +448,7 @@ const Index = () => {
                           style={{
                             fontSize: "12px",
                             color: "#666",
-                            marginTop: "4px",
+                            marginTop: "6spx",
                           }}
                         >
                           {content.address}
@@ -381,7 +460,11 @@ const Index = () => {
                             href={content.mapsUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            style={{ fontSize: "12px", color: "#4285f4" }}
+                            style={{
+                              fontSize: "13px",
+                              color: keyColor,
+                              textDecoration: "none",
+                            }}
                           >
                             地図
                           </a>
@@ -418,8 +501,8 @@ const Index = () => {
             </section>
           ))}
         <footer>
-          記載漏れやミスは Twitter：@kyoto_inaniwa または me[at]yokohama.dev
-          まで
+          最終更新：2026/7/30．記載漏れやミスは Twitter：@kyoto_inaniwa または
+          me[at]yokohama.dev まで．
         </footer>
       </Main>
     </PageWrapper>
