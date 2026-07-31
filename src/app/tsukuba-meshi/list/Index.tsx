@@ -211,7 +211,8 @@ const toggleSet = (prev: Set<string>, key: string): Set<string> => {
 };
 
 const sortKey = (r: RestaurantEntry) => {
-  const closed = !!restaurantContents[r.name]?.closed;
+  const content = restaurantContents[r.name];
+  const closed = "closed" in content && content.closed;
   return (r.unvisited ? 1 : 0) + (closed ? 2 : 0);
 };
 
@@ -223,7 +224,7 @@ const description = "筑波大学周辺の飲食店一覧（知っている限�
 
 const RestaurantRow = ({ restaurant }: { restaurant: RestaurantEntry }) => {
   const content = restaurantContents[restaurant.name];
-  const closed = !!content?.closed;
+  const closed = "closed" in content && content.closed;
   const suffix = closed ? "（閉店）" : restaurant.unvisited ? "（未遂）" : "";
   return (
     <RestaurantItem closed={closed}>
@@ -233,9 +234,9 @@ const RestaurantRow = ({ restaurant }: { restaurant: RestaurantEntry }) => {
       </Name>
       {restaurant.starred && <Star>★</Star>}
       {content?.address && <Address>{content.address}</Address>}
-      {content?.mapsUrl && (
+      {"placeId" in content && content.placeId && (
         <MapsLink
-          href={content.mapsUrl}
+          href={`https://www.google.com/maps/place/?q=place_id:${content.placeId}`}
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -266,7 +267,8 @@ const Index = () => {
     if (!selectedGenres.has("未遂") && !selectedGenres.has("閉店")) {
       return true;
     }
-    const closed = !!restaurantContents[restaurant.name]?.closed;
+    const content = restaurantContents[restaurant.name];
+    const closed = "closed" in content && content.closed;
     if (selectedGenres.has("未遂") && selectedGenres.has("閉店")) {
       return restaurant.unvisited === true || closed;
     }
@@ -415,7 +417,7 @@ const Index = () => {
               {visibleRestaurants.map((restaurant) => {
                 const content = restaurantContents[restaurant.name];
                 if (!content?.lat || !content?.lng) return null;
-                const closed = !!content?.closed;
+                const closed = "closed" in content && content.closed;
                 const color = closed
                   ? "#bbb"
                   : restaurant.starred
@@ -454,10 +456,10 @@ const Index = () => {
                           {content.address}
                         </div>
                       )}
-                      {content?.mapsUrl && (
+                      {"placeId" in content && content.placeId && (
                         <div style={{ marginTop: "4px" }}>
                           <a
-                            href={content.mapsUrl}
+                            href={`https://www.google.com/maps/place/?q=place_id:${content.placeId}`}
                             target="_blank"
                             rel="noopener noreferrer"
                             style={{
