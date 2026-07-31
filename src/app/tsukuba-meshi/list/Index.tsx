@@ -190,8 +190,13 @@ const sortKey = (r: RestaurantEntry) => {
   return (r.unvisited ? 1 : 0) + (closed ? 2 : 0);
 };
 
-const sorted = (rs: RestaurantEntry[]) =>
-  [...rs].sort((a, b) => sortKey(a) - sortKey(b));
+const sorted = (rs: RestaurantEntry[]) => {
+  return [...rs].sort((a, b) => sortKey(a) - sortKey(b));
+};
+
+const getMapsLink = (name: string, placeId: string) => {
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(name)}&query_place_id=${placeId}`;
+};
 
 const title = "つくば飲食店リスト・地図";
 const description = "筑波大学周辺の飲食店一覧（知っている限り）です．";
@@ -216,7 +221,7 @@ const RestaurantRow = ({ restaurant }: { restaurant: RestaurantEntry }) => {
       )}
       {"placeId" in content && content.placeId && (
         <MapsLink
-          href={`https://www.google.com/maps/place/?q=place_id:${content.placeId}`}
+          href={getMapsLink(restaurant.name, content.placeId)}
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -410,7 +415,7 @@ const Index = () => {
                       {"placeId" in content && content.placeId && (
                         <div style={{ marginTop: "4px" }}>
                           <a
-                            href={`https://www.google.com/maps/place/?q=place_id:${content.placeId}`}
+                            href={getMapsLink(restaurant.name, content.placeId)}
                             target="_blank"
                             rel="noopener noreferrer"
                             style={{
