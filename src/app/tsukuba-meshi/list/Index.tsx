@@ -11,7 +11,11 @@ import PageWrapper from "@/components/common/PageWrapper";
 import { restaurantContents } from "./content";
 import type { RestaurantEntry } from "./display";
 import { genres } from "./display";
-import { openings } from "./opening";
+import {
+  areaGroups,
+  timeFilters,
+  useRestaurantFilter,
+} from "./useRestaurantFilter";
 
 const keyColor = "#4285f4";
 const starColor = "#e08020";
@@ -173,115 +177,6 @@ const MapsLink = styled.a`
   }
 `;
 
-type AreaGroup = { label: string; match: (address: string) => boolean };
-
-const areaGroups: AreaGroup[] = [
-  { label: "天1", match: (a) => a.startsWith("天久保1丁目") },
-  { label: "天2", match: (a) => a.startsWith("天久保2丁目") },
-  { label: "天3", match: (a) => a.startsWith("天久保3丁目") },
-  { label: "天4", match: (a) => a.startsWith("天久保4丁目") },
-  { label: "春1", match: (a) => a.startsWith("春日1丁目") },
-  { label: "春2", match: (a) => a.startsWith("春日2丁目") },
-  { label: "春3", match: (a) => a.startsWith("春日3丁目") },
-  { label: "春4", match: (a) => a.startsWith("春日4丁目") },
-  { label: "天王台", match: (a) => a.startsWith("天王台") },
-  {
-    label: "桜・妻木・柴崎",
-    match: (a) =>
-      a.startsWith("桜") || a.startsWith("妻木") || a.startsWith("柴崎"),
-  },
-  { label: "吾妻", match: (a) => a.startsWith("吾妻") },
-  {
-    label: "研究学園・学園の森",
-    match: (a) =>
-      a.startsWith("研究学園") ||
-      a.startsWith("学園の森") ||
-      a.startsWith("学園南"),
-  },
-  {
-    label: "筑穂・要・花畑・大曽根・栗原",
-    match: (a) =>
-      a.startsWith("筑穂") ||
-      a.startsWith("要") ||
-      a.startsWith("花畑") ||
-      a.startsWith("大曽根") ||
-      a.startsWith("栗原"),
-  },
-  {
-    label: "小野崎・苅間・松代",
-    match: (a) =>
-      a.startsWith("小野崎") || a.startsWith("苅間") || a.startsWith("松代"),
-  },
-  {
-    label: "竹園・東新井",
-    match: (a) => a.startsWith("竹園") || a.startsWith("東新井"),
-  },
-  {
-    label: "東平塚・西平塚",
-    match: (a) => a.startsWith("東平塚") || a.startsWith("西平塚"),
-  },
-  { label: "その他", match: () => true },
-];
-
-const getAreaLabel = (address: string): string => {
-  for (const group of areaGroups) {
-    if (group.match(address)) return group.label;
-  }
-  return "その他";
-};
-
-type TimeFilter = (typeof TIME_FILTERS)[number];
-
-const TIME_FILTERS = [
-  "営業中",
-  "30分以上",
-  "1時間以上",
-  "2時間以上",
-  "20時まで",
-  "21時まで",
-  "22時まで",
-  "23時まで",
-  "24時まで",
-] as const;
-
-type WeeklyTime = { day: number; hour: number; minute: number };
-
-type OpeningData = (typeof openings)[keyof typeof openings];
-
-const WEEK_MINUTES = 7 * 1440;
-
-const toTotalMinutes = (wt: WeeklyTime) =>
-  wt.day * 1440 + wt.hour * 60 + wt.minute;
-
-const isInPeriod = (
-  from: WeeklyTime,
-  to: WeeklyTime,
-  nowMin: number,
-): boolean => {
-  const fromMin = toTotalMinutes(from);
-  const toMin = toTotalMinutes(to);
-  return fromMin <= toMin
-    ? nowMin >= fromMin && nowMin < toMin
-    : nowMin >= fromMin || nowMin < toMin;
-};
-
-const minutesUntilClose = (to: WeeklyTime, nowMin: number): number => {
-  const toMin = toTotalMinutes(to);
-  return toMin >= nowMin ? toMin - nowMin : WEEK_MINUTES - nowMin + toMin;
-};
-
-const getOpening = (name: string): OpeningData | undefined => {
-  return (openings as Record<string, OpeningData | undefined>)[name];
-};
-
-const toggleSet = (prev: Set<string>, key: string): Set<string> => {
-  const next = new Set(prev);
-  if (next.has(key)) {
-    next.delete(key);
-  } else next.add(key);
-  return next;
-};
-
 const sortKey = (r: RestaurantEntry) => {
   const content = restaurantContents[r.name];
   const closed = "closed" in content && content.closed;
@@ -321,143 +216,18 @@ const RestaurantRow = ({ restaurant }: { restaurant: RestaurantEntry }) => {
 
 const Index = () => {
   const [view, setView] = useState<"list" | "map">("list");
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedGenres, setSelectedGenres] = useState<Set<string>>(new Set());
-  const [selectedAreas, setSelectedAreas] = useState<Set<string>>(new Set());
-  const [selectedTimeFilter, setSelectedTimeFilter] =
-    useState<TimeFilter | null>(null);
-
-  const matchesOpening = (restaurant: RestaurantEntry): boolean => {
-    if (!selectedTimeFilter) return true;
-    const opening = getOpening(restaurant.name);
-    if (!opening) return false;
-    if (opening.type === "24hours") return true;
-
-    const now = new Date();
-    const today = now.getDay();
-    const nowMin = today * 1440 + now.getHours() * 60 + now.getMinutes();
-
-    if (selectedTimeFilter === "営業中") {
-      return opening.periods.some((p) => isInPeriod(p.from, p.to, nowMin));
-    }
-    if (selectedTimeFilter === "30分以上") {
-      return opening.periods.some(
-        (p) =>
-          isInPeriod(p.from, p.to, nowMin) &&
-          minutesUntilClose(p.to, nowMin) >= 30,
-      );
-    }
-    if (selectedTimeFilter === "1時間以上") {
-      return opening.periods.some(
-        (p) =>
-          isInPeriod(p.from, p.to, nowMin) &&
-          minutesUntilClose(p.to, nowMin) >= 60,
-      );
-    }
-    if (selectedTimeFilter === "2時間以上") {
-      return opening.periods.some(
-        (p) =>
-          isInPeriod(p.from, p.to, nowMin) &&
-          minutesUntilClose(p.to, nowMin) >= 120,
-      );
-    }
-    // "20時まで" ~ "24時まで": open at target hour today
-    const hour = parseInt(selectedTimeFilter, 10);
-    const targetDay = hour < 24 ? today : (today + 1) % 7;
-    const targetMin = targetDay * 1440 + (hour % 24) * 60;
-    return opening.periods.some((p) => {
-      const fromMin = toTotalMinutes(p.from);
-      const toMin = toTotalMinutes(p.to);
-      return fromMin <= toMin
-        ? fromMin <= targetMin && targetMin <= toMin
-        : targetMin >= fromMin || targetMin <= toMin;
-    });
-  };
-
-  const matchesSearch = (restaurant: RestaurantEntry): boolean => {
-    if (!searchQuery) {
-      return true;
-    }
-    const query = searchQuery.toLowerCase();
-    return restaurant.name.toLowerCase().includes(query);
-  };
-
-  const matchesArea = (restaurant: RestaurantEntry): boolean => {
-    if (selectedAreas.size === 0) {
-      return true;
-    }
-    const address = restaurantContents[restaurant.name]?.address;
-    if (!address) {
-      return false;
-    }
-    return selectedAreas.has(getAreaLabel(address));
-  };
-
-  const matchesStatus = (restaurant: RestaurantEntry): boolean => {
-    if (!selectedGenres.has("未遂") && !selectedGenres.has("閉店")) {
-      return true;
-    }
-    const content = restaurantContents[restaurant.name];
-    const closed = "closed" in content && content.closed;
-    if (selectedGenres.has("未遂") && selectedGenres.has("閉店")) {
-      return restaurant.unvisited === true || closed;
-    }
-    if (selectedGenres.has("未遂")) {
-      return restaurant.unvisited === true;
-    }
-    if (selectedGenres.has("閉店")) {
-      return closed;
-    }
-    return true;
-  };
-
-  const selectedNormalGenres = new Set(
-    [...selectedGenres].filter((g) => g !== "未遂" && g !== "閉店"),
-  );
-
-  const visibleGenres = genres
-    .filter(
-      (g) =>
-        selectedNormalGenres.size === 0 || selectedNormalGenres.has(g.name),
-    )
-    .map((g) => ({
-      ...g,
-      restaurants: g.restaurants?.filter(
-        (r) =>
-          matchesSearch(r) &&
-          matchesArea(r) &&
-          matchesStatus(r) &&
-          matchesOpening(r),
-      ),
-      subgenres: g.subgenres
-        ?.map((sg) => ({
-          ...sg,
-          restaurants: sg.restaurants.filter(
-            (r) =>
-              matchesSearch(r) &&
-              matchesArea(r) &&
-              matchesStatus(r) &&
-              matchesOpening(r),
-          ),
-        }))
-        .filter((sg) => sg.restaurants.length > 0),
-    }))
-    .filter((g) => {
-      if (
-        selectedAreas.size === 0 &&
-        !selectedGenres.has("未遂") &&
-        !selectedGenres.has("閉店") &&
-        !selectedTimeFilter
-      ) {
-        return true;
-      }
-      return (g.restaurants?.length ?? 0) > 0 || (g.subgenres?.length ?? 0) > 0;
-    });
-
-  const visibleRestaurants = visibleGenres.flatMap((g) => [
-    ...(g.restaurants ?? []),
-    ...(g.subgenres?.flatMap((sg) => sg.restaurants) ?? []),
-  ]);
+  const {
+    searchQuery,
+    setSearchQuery,
+    selectedGenres,
+    toggleGenre,
+    selectedAreas,
+    toggleArea,
+    selectedTimeFilter,
+    setSelectedTimeFilter,
+    visibleGenres,
+    visibleRestaurants,
+  } = useRestaurantFilter();
 
   const pickRandom = () => {
     if (visibleRestaurants.length === 0) {
@@ -493,9 +263,9 @@ const Index = () => {
             onChange={(e) => setSearchQuery(e.target.value)}
           />
           <div>
-            <FilterLabel>営業時間（今日の……営業）</FilterLabel>
+            <FilterLabel>営業時間（今日の○○時点では営業している）</FilterLabel>
             <FilterGenre>
-              {TIME_FILTERS.map((f) => (
+              {timeFilters.map((f) => (
                 <TimeFilterButton
                   key={f}
                   $active={selectedTimeFilter === f}
@@ -516,9 +286,7 @@ const Index = () => {
                   <input
                     type="checkbox"
                     checked={selectedGenres.has(g.name)}
-                    onChange={() =>
-                      setSelectedGenres((prev) => toggleSet(prev, g.name))
-                    }
+                    onChange={() => toggleGenre(g.name)}
                   />
                   {g.name}
                 </FilterChip>
@@ -528,9 +296,7 @@ const Index = () => {
                   <input
                     type="checkbox"
                     checked={selectedGenres.has(label)}
-                    onChange={() =>
-                      setSelectedGenres((prev) => toggleSet(prev, label))
-                    }
+                    onChange={() => toggleGenre(label)}
                   />
                   {label}
                 </FilterChip>
@@ -545,9 +311,7 @@ const Index = () => {
                   <input
                     type="checkbox"
                     checked={selectedAreas.has(label)}
-                    onChange={() =>
-                      setSelectedAreas((prev) => toggleSet(prev, label))
-                    }
+                    onChange={() => toggleArea(label)}
                   />
                   {label}
                 </FilterChip>
@@ -664,7 +428,7 @@ const Index = () => {
             </section>
           ))}
         <footer>
-          最終更新：2026/7/30．記載漏れやミスは Twitter：@kyoto_inaniwa または
+          最終更新：2026/7/31．記載漏れやミスは Twitter：@kyoto_inaniwa または
           me[at]yokohama.dev まで．
         </footer>
       </Main>

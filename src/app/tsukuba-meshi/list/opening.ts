@@ -1,7 +1,7 @@
 import type { openedRestaurants } from "./content";
 
 /* 曜日・時刻を表す一点を示す型 */
-type WeeklyTime = {
+export type WeeklyTime = {
   // 0（日），1（月），2（火），3（水），4（木），5（金），6（土）
   day: number;
   hour: number;
