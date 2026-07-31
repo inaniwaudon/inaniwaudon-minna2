@@ -1,9 +1,21 @@
+type Period = {
+  day: number;
+  hour: number;
+  minute: number;
+};
+
+type OpeningPeriod = {
+  open: Period;
+  close: Period;
+};
+
 type OpenedRestaurant = {
   address: string;
   placeId: string;
   lat: number;
   lng: number;
   closed?: never;
+  openings: OpeningPeriod[];
 };
 
 type ClosedRestaurant = {
