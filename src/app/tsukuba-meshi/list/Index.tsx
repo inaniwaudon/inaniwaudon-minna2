@@ -3,6 +3,7 @@ import { useState } from "react";
 import { CircleMarker, MapContainer, Popup, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 
+import { css } from "@emotion/react";
 import H2 from "@/components/common/H2";
 import H3 from "@/components/common/H3";
 import PageTitle from "@/components/common/PageTitle";
@@ -10,6 +11,7 @@ import PageWrapper from "@/components/common/PageWrapper";
 import { restaurantContents } from "./content";
 import type { RestaurantEntry } from "./display";
 import { genres } from "./display";
+import { openings } from "./opening";
 
 const keyColor = "#4285f4";
 const starColor = "#e08020";
@@ -98,11 +100,28 @@ const FilterGenre = styled.div`
   gap: 8px;
 `;
 
-const FilterChip = styled.label<{ $checked: boolean }>`
+const chipOrButton = css`
+  line-height: 1.8;
   padding: 2px 8px;
   border-radius: 6px;
   font-size: 14px;
   cursor: pointer;
+  box-sizing: content-box;
+  border: none;
+`;
+
+const TimeFilterButton = styled.button<{ $active: boolean }>`
+  ${chipOrButton}
+  background: ${({ $active }) => ($active ? keyColor : "#eee")};
+  color: ${({ $active }) => ($active ? "white" : "#666")};
+
+  &:hover {
+    opacity: 0.85;
+  }
+`;
+
+const FilterChip = styled.label<{ $checked: boolean }>`
+  ${chipOrButton}
   background: ${({ $checked }) => ($checked ? keyColor : "#eee")};
   color: ${({ $checked }) => ($checked ? "white" : "#666")};
 
@@ -211,6 +230,50 @@ const getAreaLabel = (address: string): string => {
   return "その他";
 };
 
+type TimeFilter = (typeof TIME_FILTERS)[number];
+
+const TIME_FILTERS = [
+  "営業中",
+  "30分以上",
+  "1時間以上",
+  "2時間以上",
+  "20時まで",
+  "21時まで",
+  "22時まで",
+  "23時まで",
+  "24時まで",
+] as const;
+
+type WeeklyTime = { day: number; hour: number; minute: number };
+
+type OpeningData = (typeof openings)[keyof typeof openings];
+
+const WEEK_MINUTES = 7 * 1440;
+
+const toTotalMinutes = (wt: WeeklyTime) =>
+  wt.day * 1440 + wt.hour * 60 + wt.minute;
+
+const isInPeriod = (
+  from: WeeklyTime,
+  to: WeeklyTime,
+  nowMin: number,
+): boolean => {
+  const fromMin = toTotalMinutes(from);
+  const toMin = toTotalMinutes(to);
+  return fromMin <= toMin
+    ? nowMin >= fromMin && nowMin < toMin
+    : nowMin >= fromMin || nowMin < toMin;
+};
+
+const minutesUntilClose = (to: WeeklyTime, nowMin: number): number => {
+  const toMin = toTotalMinutes(to);
+  return toMin >= nowMin ? toMin - nowMin : WEEK_MINUTES - nowMin + toMin;
+};
+
+const getOpening = (name: string): OpeningData | undefined => {
+  return (openings as Record<string, OpeningData | undefined>)[name];
+};
+
 const toggleSet = (prev: Set<string>, key: string): Set<string> => {
   const next = new Set(prev);
   if (next.has(key)) {
@@ -261,6 +324,55 @@ const Index = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedGenres, setSelectedGenres] = useState<Set<string>>(new Set());
   const [selectedAreas, setSelectedAreas] = useState<Set<string>>(new Set());
+  const [selectedTimeFilter, setSelectedTimeFilter] =
+    useState<TimeFilter | null>(null);
+
+  const matchesOpening = (restaurant: RestaurantEntry): boolean => {
+    if (!selectedTimeFilter) return true;
+    const opening = getOpening(restaurant.name);
+    if (!opening) return false;
+    if (opening.type === "24hours") return true;
+
+    const now = new Date();
+    const today = now.getDay();
+    const nowMin = today * 1440 + now.getHours() * 60 + now.getMinutes();
+
+    if (selectedTimeFilter === "営業中") {
+      return opening.periods.some((p) => isInPeriod(p.from, p.to, nowMin));
+    }
+    if (selectedTimeFilter === "30分以上") {
+      return opening.periods.some(
+        (p) =>
+          isInPeriod(p.from, p.to, nowMin) &&
+          minutesUntilClose(p.to, nowMin) >= 30,
+      );
+    }
+    if (selectedTimeFilter === "1時間以上") {
+      return opening.periods.some(
+        (p) =>
+          isInPeriod(p.from, p.to, nowMin) &&
+          minutesUntilClose(p.to, nowMin) >= 60,
+      );
+    }
+    if (selectedTimeFilter === "2時間以上") {
+      return opening.periods.some(
+        (p) =>
+          isInPeriod(p.from, p.to, nowMin) &&
+          minutesUntilClose(p.to, nowMin) >= 120,
+      );
+    }
+    // "20時まで" ~ "24時まで": open at target hour today
+    const hour = parseInt(selectedTimeFilter, 10);
+    const targetDay = hour < 24 ? today : (today + 1) % 7;
+    const targetMin = targetDay * 1440 + (hour % 24) * 60;
+    return opening.periods.some((p) => {
+      const fromMin = toTotalMinutes(p.from);
+      const toMin = toTotalMinutes(p.to);
+      return fromMin <= toMin
+        ? fromMin <= targetMin && targetMin <= toMin
+        : targetMin >= fromMin || targetMin <= toMin;
+    });
+  };
 
   const matchesSearch = (restaurant: RestaurantEntry): boolean => {
     if (!searchQuery) {
@@ -311,13 +423,21 @@ const Index = () => {
     .map((g) => ({
       ...g,
       restaurants: g.restaurants?.filter(
-        (r) => matchesSearch(r) && matchesArea(r) && matchesStatus(r),
+        (r) =>
+          matchesSearch(r) &&
+          matchesArea(r) &&
+          matchesStatus(r) &&
+          matchesOpening(r),
       ),
       subgenres: g.subgenres
         ?.map((sg) => ({
           ...sg,
           restaurants: sg.restaurants.filter(
-            (r) => matchesSearch(r) && matchesArea(r) && matchesStatus(r),
+            (r) =>
+              matchesSearch(r) &&
+              matchesArea(r) &&
+              matchesStatus(r) &&
+              matchesOpening(r),
           ),
         }))
         .filter((sg) => sg.restaurants.length > 0),
@@ -326,7 +446,8 @@ const Index = () => {
       if (
         selectedAreas.size === 0 &&
         !selectedGenres.has("未遂") &&
-        !selectedGenres.has("閉店")
+        !selectedGenres.has("閉店") &&
+        !selectedTimeFilter
       ) {
         return true;
       }
@@ -371,6 +492,22 @@ const Index = () => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
+          <div>
+            <FilterLabel>営業時間（今日の……営業）</FilterLabel>
+            <FilterGenre>
+              {TIME_FILTERS.map((f) => (
+                <TimeFilterButton
+                  key={f}
+                  $active={selectedTimeFilter === f}
+                  onClick={() =>
+                    setSelectedTimeFilter((prev) => (prev === f ? null : f))
+                  }
+                >
+                  {f}
+                </TimeFilterButton>
+              ))}
+            </FilterGenre>
+          </div>
           <div>
             <FilterLabel>ジャンル</FilterLabel>
             <FilterGenre>
