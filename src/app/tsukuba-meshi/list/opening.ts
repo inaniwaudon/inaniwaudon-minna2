@@ -25435,3 +25435,36 @@ export const openings: Record<keyof typeof openedRestaurants, Opening> = {
     ],
   },
 };
+
+const formatHourMinute = (h: number, m: number) => {
+  return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
+};
+
+/**
+ * 今日の営業時間を文字列で返す．
+ * - データなしの場合には `null`
+ * - 本日定休の場合には "本日休み"
+ * - 24時間 → "24時間営業"
+ */
+export const getTodayHours = (name: string): string | null => {
+  const opening = (openings as Record<string, Opening>)[name];
+  if (!opening) {
+    return null;
+  }
+  if (opening.type === "24hours") {
+    return "24時間営業";
+  }
+
+  const today = new Date().getDay();
+  const todayPeriods = opening.periods.filter((p) => p.from.day === today);
+  if (todayPeriods.length === 0) {
+    return "本日休み";
+  }
+
+  return todayPeriods
+    .map(
+      (p) =>
+        `${formatHourMinute(p.from.hour, p.from.minute)}–${formatHourMinute(p.to.hour, p.to.minute)}`,
+    )
+    .join(" / ");
+};

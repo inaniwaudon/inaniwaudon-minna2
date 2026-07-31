@@ -11,6 +11,7 @@ import PageWrapper from "@/components/common/PageWrapper";
 import { restaurantContents } from "./content";
 import type { RestaurantEntry } from "./display";
 import { genres } from "./display";
+import { getTodayHours } from "./opening";
 import {
   areaGroups,
   timeFilters,
@@ -53,7 +54,7 @@ const RandomButton = styled.button`
   cursor: pointer;
   position: fixed;
   right: 24px;
-  bottom: 24px;
+  bottom: calc(24px + env(safe-area-inset-bottom));
 
   &:hover {
     opacity: 0.8;
@@ -101,14 +102,14 @@ const FilterGenre = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
-  gap: 8px;
+  gap: 6px;
 `;
 
 const chipOrButton = css`
-  line-height: 1.8;
+  line-height: 1.5;
   padding: 2px 8px;
   border-radius: 6px;
-  font-size: 14px;
+  font-size: 13px;
   cursor: pointer;
   box-sizing: content-box;
   border: none;
@@ -166,6 +167,12 @@ const Address = styled.span`
   margin-right: 8px;
 `;
 
+const TodayHours = styled.span<{ $closed: boolean }>`
+  color: ${({ $closed }) => ($closed ? "#e08020" : "#888")};
+  font-size: 13px;
+  margin-right: 8px;
+`;
+
 const MapsLink = styled.a`
   font-size: 12px;
   color: ${keyColor};
@@ -193,6 +200,7 @@ const RestaurantRow = ({ restaurant }: { restaurant: RestaurantEntry }) => {
   const content = restaurantContents[restaurant.name];
   const closed = "closed" in content && content.closed;
   const suffix = closed ? "（閉店）" : restaurant.unvisited ? "（未遂）" : "";
+  const todayHours = getTodayHours(restaurant.name);
   return (
     <RestaurantItem closed={closed}>
       <Name closed={closed}>
@@ -201,6 +209,11 @@ const RestaurantRow = ({ restaurant }: { restaurant: RestaurantEntry }) => {
       </Name>
       {restaurant.starred && <Star>★</Star>}
       {content?.address && <Address>{content.address}</Address>}
+      {todayHours && (
+        <TodayHours $closed={todayHours === "本日休み"}>
+          {todayHours}
+        </TodayHours>
+      )}
       {"placeId" in content && content.placeId && (
         <MapsLink
           href={`https://www.google.com/maps/place/?q=place_id:${content.placeId}`}
@@ -263,7 +276,7 @@ const Index = () => {
             onChange={(e) => setSearchQuery(e.target.value)}
           />
           <div>
-            <FilterLabel>営業時間（今日の○○時点では営業している）</FilterLabel>
+            <FilterLabel>営業時間（今日の○○時点に営業している）</FilterLabel>
             <FilterGenre>
               {timeFilters.map((f) => (
                 <TimeFilterButton

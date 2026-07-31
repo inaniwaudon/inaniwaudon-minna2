@@ -59,16 +59,21 @@ export const areaGroups: AreaGroup[] = [
   { label: "その他", match: () => true },
 ];
 
-/** 営業時間フィルターの選択肢．「営業中」「残り時間」「閉店時刻」の3種類を含む． */
+/** 営業時間フィルタの選択肢．「営業中」「残り時間」「閉店時刻」の3種類を含む． */
 export const timeFilters = [
   "現在",
-  "30分後",
-  "1時間後",
-  "2時間後",
+  "現在–30分後",
+  "現在–1時間後",
+  "現在–2時間後",
+  "11時",
   "12時",
   "13時",
   "14時",
   "15時",
+  "16時",
+  "17時",
+  "18時",
+  "19時",
   "20時",
   "21時",
   "22時",
@@ -151,7 +156,7 @@ const toggleSet = (prev: Set<string>, key: string): Set<string> => {
 
 /**
  * レストラン一覧のフィルタリング状態と操作を提供するカスタムフック．
-  */
+ */
 export const useRestaurantFilter = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedGenres, setSelectedGenres] = useState<Set<string>>(new Set());
@@ -159,69 +164,69 @@ export const useRestaurantFilter = () => {
   const [selectedTimeFilter, setSelectedTimeFilter] =
     useState<TimeFilter | null>(null);
 
-/**
+  /**
    * 検索クエリに対してレストラン名が部分一致するかを返す．
    * クエリが空の場合常に `true`．
    */
   const matchesSearch = (restaurant: RestaurantEntry): boolean => {
     if (!searchQuery) {
-return true;
-}
+      return true;
+    }
     return restaurant.name.toLowerCase().includes(searchQuery.toLowerCase());
   };
 
-/**
+  /**
    * 選択中のエリアにレストランの住所が含まれるかを返す．
    * エリア未選択の場合常に `true`
    */
   const matchesArea = (restaurant: RestaurantEntry): boolean => {
     if (selectedAreas.size === 0) {
-return true;
-}
+      return true;
+    }
     const address = restaurantContents[restaurant.name]?.address;
     if (!address) {
-return false;
-}
+      return false;
+    }
     return selectedAreas.has(getAreaLabel(address));
   };
 
-/**
+  /**
    * 「未遂」「閉店」フィルタに対してレストランのステータスが一致するかを返す．
    * どちらも未選択の場合常に `true`．
    */
   const matchesStatus = (restaurant: RestaurantEntry): boolean => {
     if (!selectedGenres.has("未遂") && !selectedGenres.has("閉店")) {
-return true;
-}
+      return true;
+    }
     const content = restaurantContents[restaurant.name];
     const closed = "closed" in content && content.closed;
     if (selectedGenres.has("未遂") && selectedGenres.has("閉店")) {
       return restaurant.unvisited === true || closed;
     }
     if (selectedGenres.has("未遂")) {
-return restaurant.unvisited === true;
-}
+      return restaurant.unvisited === true;
+    }
     if (selectedGenres.has("閉店")) {
-return closed;
-}
+      return closed;
+    }
     return true;
   };
 
-/**
+  /**
    * 選択中の時間フィルタの時点でレストランが営業中かどうかを返す．
    * フィルタ未選択の場合常に `true`．営業時間データが存在しない場合は `false`．
    */
   const matchesOpening = (restaurant: RestaurantEntry): boolean => {
     if (!selectedTimeFilter) {
-return true;
-}
+      return true;
+    }
     const opening = (openings as Record<string, OpeningData>)[restaurant.name];
     if (!opening) {
-return false;
-}
+      return false;
+    }
     if (opening.type === "24hours") {
-return true;
-}
+      return true;
+    }
 
     const now = new Date();
     const today = now.getDay();
@@ -255,22 +260,18 @@ return true;
     const hour = parseInt(selectedTimeFilter, 10);
     const targetDay = hour < 24 ? today : (today + 1) % 7;
     const targetMin = targetDay * 1440 + (hour % 24) * 60;
-    return opening.periods.some((p) => {
-      const fromMin = toTotalMinutes(p.from);
-      const toMin = toTotalMinutes(p.to);
-      return fromMin <= toMin
-        ? fromMin <= targetMin && targetMin <= toMin
-        : targetMin >= fromMin || targetMin <= toMin;
-    });
+    return opening.periods.some((p) => isInPeriod(p.from, p.to, targetMin));
   };
 
-/** 全フィルタ（検索・エリア・ステータス・営業時間）を AND で適用した総合判定． */
+  /**
+   * 全てのフィルタを AND で適用する．
+   */
   const matches = (r: RestaurantEntry) => {
     return (
-    matchesSearch(r) &&
-matchesArea(r) &&
-matchesStatus(r) &&
-matchesOpening(r)
+      matchesSearch(r) &&
+      matchesArea(r) &&
+      matchesStatus(r) &&
+      matchesOpening(r)
     );
   };
 
@@ -279,6 +280,7 @@ matchesOpening(r)
   );
 
   const isFiltering =
+    searchQuery !== "" ||
     selectedAreas.size > 0 ||
     selectedGenres.has("未遂") ||
     selectedGenres.has("閉店") ||
