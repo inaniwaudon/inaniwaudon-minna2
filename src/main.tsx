@@ -1,16 +1,15 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { HelmetProvider } from "react-helmet-async";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import "./globals.css";
 import NotFound from "./app/404/Index.tsx";
 import About from "./app/about/Index.tsx";
 import Article2024 from "./app/articles/2024/Index.tsx";
 import Article2025 from "./app/articles/2025/Index.tsx";
-import Articles from "./app/articles/Index.tsx";
-import Diary from "./app/articles/diary/Index.tsx";
 import DiaryCompare from "./app/articles/diary/compare/Index.tsx";
+import Diary from "./app/articles/diary/Index.tsx";
+import Articles from "./app/articles/Index.tsx";
 import Max from "./app/articles/max/Index.tsx";
 import Opinion2 from "./app/articles/opinion2/Index.tsx";
 import AuthCallback from "./app/auth/callback/Index.tsx";
@@ -20,17 +19,18 @@ import ClassImpressionId from "./app/class-impression/id/Index.tsx";
 import Index from "./app/index/Index.tsx";
 import Kdb from "./app/kdb/Index.tsx";
 import Locations from "./app/locations/Index.tsx";
-import LocationsId from "./app/locations/id/Index.tsx";
 import LocationsIdCheckin from "./app/locations/id/checkin/Index.tsx";
+import LocationsId from "./app/locations/id/Index.tsx";
 import LocationsNew from "./app/locations/new/Index.tsx";
 import Nerene from "./app/nerene/Index.tsx";
 import Photos from "./app/photos/Index.tsx";
-import PhotosId from "./app/photos/id/Index.tsx";
 import PhotosIdAdd from "./app/photos/id/add/Index.tsx";
+import PhotosId from "./app/photos/id/Index.tsx";
 import Tanka from "./app/tanka/Index.tsx";
 import Tasks from "./app/tasks/Index.tsx";
-import TsukubaMeshi from "./app/tsukuba-meshi/Index.tsx";
 import Errata2023 from "./app/tsukuba-meshi/errata2023/Index.tsx";
+import TsukubaMeshi from "./app/tsukuba-meshi/Index.tsx";
+import TsukubaMeshiList from "./app/tsukuba-meshi/list/Index.tsx";
 import Ramen2023 from "./app/tsukuba-meshi/ramen2023/Index.tsx";
 import Ramen2024 from "./app/tsukuba-meshi/ramen2024/Index.tsx";
 import Restaurant2023 from "./app/tsukuba-meshi/restaurant2023/Index.tsx";
@@ -153,6 +153,10 @@ const router = createBrowserRouter([
     element: <Restaurant2023 />,
   },
   {
+    path: "/tsukuba-meshi/list",
+    element: <TsukubaMeshiList />,
+  },
+  {
     path: "/*",
     element: <NotFound />,
   },
@@ -160,8 +164,6 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <HelmetProvider>
-      <RouterProvider router={router} />
-    </HelmetProvider>
+    <RouterProvider router={router} />
   </StrictMode>,
 );

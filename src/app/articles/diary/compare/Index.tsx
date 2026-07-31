@@ -1,13 +1,12 @@
 import styled from "@emotion/styled";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Helmet } from "react-helmet-async";
 
 import H3 from "@/components/common/H3";
 import {
   type DiaryItem,
+  diaryItemsByYear,
   Photo,
   PhotoWrapper,
-  diaryItemsByYear,
   renderBody,
 } from "../utils";
 
@@ -172,7 +171,7 @@ const getDateKey = (date: string) => {
  */
 const keyToNum = (key: string) => {
   if (key.endsWith("ふ")) {
-    return Number.parseInt(key) * 10000 + 9999;
+    return Number.parseInt(key, 10) * 10000 + 9999;
   }
   const [m, d] = key.split("/").map(Number);
   return m * 100 + d;
@@ -314,9 +313,7 @@ const Index = () => {
 
   return (
     <>
-      <Helmet>
-        <title>日報（3年分の比較）｜いなにわうどん.みんな</title>
-      </Helmet>
+      <title>日報（3年分の比較）｜いなにわうどん.みんな</title>
       <Columns>
         {PERIODS.map((period, i) => (
           <DiaryColumn

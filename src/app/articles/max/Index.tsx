@@ -1,11 +1,10 @@
 import styled from "@emotion/styled";
-import { Helmet } from "react-helmet-async";
 
 import compositions from "@/assets/max/compositions.webp";
 import g2sanserif from "@/assets/max/g2sanserif.webp";
 import logo from "@/assets/max/logo.svg";
-import maxLogoAnalyze from "@/assets/max/max-logo-analyze.webp";
 import maxLogo from "@/assets/max/max-logo.webp";
+import maxLogoAnalyze from "@/assets/max/max-logo-analyze.webp";
 import maxMakuhariImage from "@/assets/max/max-makuhari.webp";
 import maxRedImage from "@/assets/max/max-red.webp";
 import maxTrace from "@/assets/max/max-trace.webp";
@@ -223,18 +222,16 @@ const links = [
 const Index = () => {
   return (
     <>
-      <Helmet>
-        <title>{title}</title>
-        <link
-          rel="shortcut icon"
-          href="https://いなにわうどん.みんな/assets/max-ogp.jpg"
-          type="image/x-icon"
-        />
-        <meta
-          name="description"
-          content="特色あるマックスコーヒーのデザインに着目し、マッ缶ことマックスコーヒー缶のパッケージの装飾を調べました。"
-        />
-      </Helmet>
+      <title>{title}</title>
+      <link
+        rel="shortcut icon"
+        href="https://いなにわうどん.みんな/assets/max-ogp.jpg"
+        type="image/x-icon"
+      />
+      <meta
+        name="description"
+        content="特色あるマックスコーヒーのデザインに着目し、マッ缶ことマックスコーヒー缶のパッケージの装飾を調べました。"
+      />
       <ThumbnailImage style={{ backgroundImage: `url(${thumbnail}` }} />
       <BodyWrapper>
         <PageWrapper>

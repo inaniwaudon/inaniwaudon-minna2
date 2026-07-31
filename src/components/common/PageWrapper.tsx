@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { Helmet } from "react-helmet-async";
 
 import Footer from "./Footer";
 import Header from "./Header";
@@ -27,10 +26,8 @@ const PageWrapper = ({
 }: PageWrapperProps) => {
   return (
     <>
-      <Helmet>
-        <title>{title}｜いなにわうどん.みんな</title>
-        {description && <meta name="description" content={description} />}
-      </Helmet>
+      <title>{`${title}｜いなにわうどん.みんな`}</title>
+      {description && <meta name="description" content={description} />}
       <Wrapper>
         {children}
         <Footer title={title} path={path} />
