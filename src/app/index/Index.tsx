@@ -1,11 +1,8 @@
 import styled from "@emotion/styled";
 import { useEffect, useMemo, useState } from "react";
-import { Helmet } from "react-helmet-async";
 
 import { photos } from "@/app/photos/const";
 import jikan from "@/assets/index/jikan.webp";
-import logo from "@/assets/index/logo2.svg";
-
 import s210on from "@/assets/index/links/210on.svg";
 import asaka from "@/assets/index/links/asaka.webp";
 import charlotteace from "@/assets/index/links/charlotteace.webp";
@@ -15,6 +12,7 @@ import iorinio from "@/assets/index/links/iorin-io.webp";
 import itsudev from "@/assets/index/links/itsu-dev.svg";
 import nakaya from "@/assets/index/links/nakaya.webp";
 import raspi0124 from "@/assets/index/links/raspi0124.webp";
+import logo from "@/assets/index/logo2.svg";
 
 import Anchor, { linkColor } from "@/components/common/Anchor";
 import AnchorListItem from "@/components/common/AnchorListItem";
@@ -23,10 +21,10 @@ import Header from "@/components/common/Header";
 import { getPhotoDir } from "@/lib/photo";
 import { articleLinks } from "../articles/articles";
 import { locations } from "../locations/locations";
+import { creations } from "./const/creation";
 import LinkList from "./LinkList";
 import Nengajo from "./Nengajo";
 import Watercolor from "./Watercolor";
-import { creations } from "./const/creation";
 
 const Wrapper = styled.main`
   height: 100vh;
@@ -239,9 +237,7 @@ const Main = () => {
 
   return (
     <>
-      <Helmet>
-        <title>いなにわうどん.みんな</title>
-      </Helmet>
+      <title>いなにわうどん.みんな</title>
       <Wrapper>
         <Content>
           <H1>

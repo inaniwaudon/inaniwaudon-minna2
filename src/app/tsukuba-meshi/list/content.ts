@@ -351,11 +351,11 @@ export const openedRestaurants = {
     lng: 140.140934,
   },
   らーめん三水: {
-    address: "上横場らーめん三水",
+    address: "筑穂1丁目14–15",
     mapsUrl:
-      "https://www.google.com/maps/place/?q=place_id:ChIJyWScTEELImARQ6GZe5Iahvo",
-    lat: 36.0473053,
-    lng: 140.084589,
+      "https://www.google.com/maps/place/?q=place_id:ChIJ5_dxJwAJImARC1HPC96WPc8",
+    lat: 36.157949,
+    lng: 140.0990656,
   },
   わかたろう: {
     address: "天久保3丁目21–3 星谷ビル 1F",
@@ -1411,15 +1411,15 @@ export const openedRestaurants = {
 
 export const closedRestaurants = {
   RanRan: { closed: true },
-  "WIKIWIKI: ハンバーガ": { closed: true },
+  "バーガーズカフェWikiwiki: ハンバーガ": { closed: true },
   "エルトリート @つくば学園店: メキシコ料理": { closed: true },
   コスモス: { closed: true },
   "ビッグエコー @つくば天久保店（モナコ店）": { closed: true },
-  伊助: { closed: true },
+  "麺匠 伊助": { closed: true },
   俺の生きる道W: { closed: true },
   "和の国 KAGUYA RAMEN": { closed: true },
-  "大戸屋 @大戸屋 BiViつくば店": { closed: true },
-  新世界: { closed: true },
+  "大戸屋 @BiViつくば店": { closed: true },
+  "居酒屋 新世界": { closed: true },
   春日食堂: { closed: true },
   松屋食堂: { closed: true },
   盛清六: {
@@ -1494,7 +1494,7 @@ export const unknownRestaurants = {
   "moi!kka（モイッカ）": {},
   "スターバックスコーヒー @筑波大学中央図書館店": {},
   "スぺシャルティコーヒー豆専門店 トライブ": {},
-  "豆ぽっ自家焙煎珈琲 まめぽっと": {},
+  "自家焙煎珈琲 まめぽっと": {},
   "SORA CAFE & COOKING ROOM": {},
   SugayaCoffee: {},
   "カフェ クレマチス": {},

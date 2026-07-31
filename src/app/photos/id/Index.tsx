@@ -1,10 +1,9 @@
 import styled from "@emotion/styled";
-import { Helmet } from "react-helmet-async";
 import { useParams } from "react-router-dom";
 
 import NotFound from "@/app/404/Index";
 import AdobeFonts from "@/components/common/AdobeFonts";
-import { type PhotoInfo, getPhotoDir } from "@/lib/photo";
+import { getPhotoDir, type PhotoInfo } from "@/lib/photo";
 import { photos } from "../const";
 import Main from "./Main";
 
@@ -89,10 +88,8 @@ const Index = () => {
 
   return (
     <>
-      <Helmet>
-        <title>{photoData.title}｜いなにわうどん.みんな</title>
-        <meta name="format-detection" content="telephone=no" />
-      </Helmet>
+      <title>{`${photoData.title}｜いなにわうどん.みんな`}</title>
+      <meta name="format-detection" content="telephone=no" />
       <AdobeFonts />
       <Main photos={newPhotos} />
       <Footer>
