@@ -14,18 +14,7 @@ type ClosedRestaurant = {
   lng?: number;
 };
 
-type UnknownRestaurant = {
-  closed?: false;
-  address?: string;
-  mapsUrl?: string;
-  lat?: number;
-  lng?: number;
-};
-
-export type RestaurantContent =
-  | OpenedRestaurant
-  | ClosedRestaurant
-  | UnknownRestaurant;
+export type RestaurantContent = OpenedRestaurant | ClosedRestaurant;
 
 export const openedRestaurants = {
   "ALPACA DINING": {
@@ -554,7 +543,7 @@ export const openedRestaurants = {
     lng: 140.1044288,
   },
   "ジョイフル @つくば桜店": {
-    address: "桜1丁目14番地3",
+    address: "桜1丁目14–3",
     mapsUrl:
       "https://www.google.com/maps/place/?q=place_id:ChIJMyRrFhsMImARq_wLwfS8Mk0",
     lat: 36.1120919,
@@ -1407,21 +1396,432 @@ export const openedRestaurants = {
     lat: 36.0891525,
     lng: 140.1103101,
   },
+  "俺の生きる道 @つくば店": {
+    address: "吾妻3丁目12–1",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJb-kT_G8MImAR1IsKFBxxQ5g",
+    lat: 36.090363,
+    lng: 140.1114992,
+  },
+  "横浜家系ラーメン 魂心家 @つくば店": {
+    address: "大曽根字吾妻3507",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJgz0Nfe4JImARvHtWywOv0no",
+    lat: 36.13989,
+    lng: 140.0843321,
+  },
+  "煮干中華ソバ イチカワ": {
+    address: "天久保2丁目9–2",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJv-jK1gwMImARUFPXaNxVENg",
+    lat: 36.098365,
+    lng: 140.1083905,
+  },
+  "中華そば 騰匠俐": {
+    address: "桜2丁目15–3",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJq1h3CAANImARapf2bQjjpXk",
+    lat: 36.1115261,
+    lng: 140.1106368,
+  },
+  中華そばビート: {
+    address: "竹園1丁目9–7 林ビル 102",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJjb6KewANImARYIcvgjETLL0",
+    lat: 36.0780287,
+    lng: 140.1145538,
+  },
+  "味噌のジョー @つくば本店 ": {
+    address: "東2丁目10–16",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJBU3SVCxzImAR6kwvGlIE5Hc",
+    lat: 36.0508397,
+    lng: 140.1317773,
+  },
+  "ゆきむら亭 つくば西店": {
+    address: "西平塚331–10",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJizLgPuQLImAROAyRRCwt39I",
+    lat: 36.1017041,
+    lng: 140.0866783,
+  },
+  "麺処 明り": {
+    address: "柴崎1050–1",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJry3j08sJImARMrwuFAZMJP8",
+    lat: 36.1091866,
+    lng: 140.1195199,
+  },
+  屋台ラーメン桜: {
+    address: "中根846",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJl53yYYQLImARuGPpO-qgbiA",
+    lat: 36.1075587,
+    lng: 140.1284504,
+  },
+  麺や小五郎: {
+    address: "桜1丁目12–1",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJ-4NpAgUMImAR7aXDUgPAHmo",
+    lat: 36.1094656,
+    lng: 140.1098298,
+  },
+  ららららーめんや: {
+    address: "天久保1丁目6–11",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJrWj9MHAMImARMMelyXK9rqs",
+    lat: 36.0913326,
+    lng: 140.1104375,
+  },
+  らーめんICHI: {
+    address: "天久保1丁目6–15",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJjRpWBHINImARXenJZg-yBUI",
+    lat: 36.0906029,
+    lng: 140.1089618,
+  },
+  "麺屋 湯火": {
+    address: "天久保2丁目3–1 ホソダビル 101",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJB_rEM5sNImARlq6lb4A-FPI",
+    lat: 36.0956259,
+    lng: 140.1066423,
+  },
+  豚飯坊屋: {
+    address: "天久保2丁目6–26",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJU8UB9W8NImARKm2TnWBMMGI",
+    lat: 36.0978931,
+    lng: 140.1062427,
+  },
+  "かつ太郎本店 つくば学園店": {
+    address: "西平塚331–6",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJZ7jjTr4LImARdCkHrsm3yus",
+    lat: 36.10130669999999,
+    lng: 140.0867507,
+  },
+  "おそば 増田屋": {
+    address: "春日2丁目2–5",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJD8AcqX4MImARBCSD_r8XV_M",
+    lat: 36.0828,
+    lng: 140.105893,
+  },
+  "つくば蕎麦物語 一成": {
+    address: "吾妻1丁目8–10 BiViつくば 2F",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJE2yunmIMImAR0H1yEpNWSnc",
+    lat: 36.0819465,
+    lng: 140.1128004,
+  },
+  桃ちゃん弁当: {
+    address: "天久保3丁目14–5",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJ30ocawYMImARW1U0Ua8qB8w",
+    lat: 36.1070031,
+    lng: 140.1049944,
+  },
+  とんかつ弁当かつ大: {
+    address: "天久保3丁目13–3",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJZX_4NA8MImAR3AcfdP4XeJc",
+    lat: 36.10492730000001,
+    lng: 140.1062311,
+  },
+  おふくろさん弁当: {
+    address: "天久保3丁目10–4",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJ-RWwsQcMImARYcIhImMoT0Q",
+    lat: 36.1066367,
+    lng: 140.1030684,
+  },
+  "本格韓国料理 BabSang（バブサン）: 韓国料理": {
+    address: "西平塚265–1",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJa5P43b8LImAR1Hgytin1POc",
+    lat: 36.1001826,
+    lng: 140.0898658,
+  },
+  "Spice curry TRIGGER": {
+    address: "天久保2丁目6–1 ベストランドIV 101",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJ13Wsw64NImARQObrGD7NN80",
+    lat: 36.0981645,
+    lng: 140.1061749,
+  },
+  ストリートス: {
+    address: "天久保1丁目10–4 ジョイプラザ天久保 5",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJscKz_LQNImARUF0lRhVigPY",
+    lat: 36.0943152,
+    lng: 140.1074618,
+  },
+  "kalak（カラク）": {
+    address: "柴崎1050–1",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJk8yi_pgLImARsPZQGb_KSq4",
+    lat: 36.1091362,
+    lng: 140.1195283,
+  },
+  "韓国料理 炭火焼肉 ハンアリ": {
+    address: "妻木2100–7",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJ_yzPqAwMImAR_7PSUCZn9g4",
+    lat: 36.09899110000001,
+    lng: 140.1121561,
+  },
+  "焼肉 平城苑 つくば学園店": {
+    address: "小野崎283–1",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJd28KPIAMImARvXfwiNoMjto",
+    lat: 36.075585,
+    lng: 140.1019113,
+  },
+  "串かつ でんがな BiViつくば店": {
+    address: "吾妻1丁目8–10 BiViつくば 3F",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJuR5nlWIMImARqxkzBQNkz0g",
+    lat: 36.0816723,
+    lng: 140.1128976,
+  },
+  "naked bar": {
+    address: "天久保1丁目10–18",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJCZLqy3MMImAR64-ghwJj1UI",
+    lat: 36.0943052,
+    lng: 140.1083818,
+  },
+  "東京バル GardenTerrace": {
+    address: "春日1丁目2 グロ–バルゲストハウス",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJmd2XQagNImAR8-iBlzxdM18",
+    lat: 36.085627,
+    lng: 140.107899,
+  },
+  "しゃぶ葉 @つくば店": {
+    address: "下原376–2",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJKVl1_0hzImARkFOqyvXC2ng",
+    lat: 36.0501211,
+    lng: 140.135204,
+  },
+  "びっくりドンキー @つくば中央店": {
+    address: "小野崎281–9",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJfzaeVoAMImARY3D7u3OWYLk",
+    lat: 36.0755772,
+    lng: 140.103371,
+  },
+  "ばんどう太郎 @つくば学園店": {
+    address: "西平塚331–7",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJ85y3S-QLImARhjFQ7aeQ1qk",
+    lat: 36.1010772,
+    lng: 140.0870085,
+  },
+  "和食さと @つくば店": {
+    address: "東新井3–9",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJ3cxaFYYMImARoWC72JZ_GyE",
+    lat: 36.076772,
+    lng: 140.110008,
+  },
+  "モスバーガー @つくば中央店": {
+    address: "小野崎88–7",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJoe6JL4cMImAR9bID4EOShUc",
+    lat: 36.0771416,
+    lng: 140.1067383,
+  },
+  "ケンタッキーフライドチキン @筑波学園店": {
+    address: "小野崎174–1",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJ26UQ3rsNImARCvQSZ5eT8rM",
+    lat: 36.0761883,
+    lng: 140.104588,
+  },
+  "カレーハウス CoCo壱番屋 @つくば桜店": {
+    address: "桜3丁目10–1",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJUbVM7hsMImARYJTZNcdB7bA",
+    lat: 36.1138717,
+    lng: 140.1156244,
+  },
+  "moi!kka（モイッカ）": {
+    address: "春日4丁目20–1",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJS2RA9vYLImARVPdB60TPl84",
+    lat: 36.1000551,
+    lng: 140.0983988,
+  },
+  "スターバックスコーヒー @筑波大学中央図書館店": {
+    address: "天王台1丁目1–1 中央図書館 筑波大学",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJO3QLrAAMImARdnkcIOBc138",
+    lat: 36.1091753,
+    lng: 140.1017141,
+  },
+  "スぺシャルティコーヒー豆専門店 トライブ": {
+    address: "東新井20–7",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJTwDdaI8MImARotMk1W_RcDA",
+    lat: 36.075039,
+    lng: 140.11205,
+  },
+  "自家焙煎珈琲 まめぽっと": {
+    address: "春日3丁目2–6 パルネット春日",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJZTJ3iYkLImAR7CQ7EHSpSqo",
+    lat: 36.0895485,
+    lng: 140.0993399,
+  },
+  "SORA CAFE & COOKING ROOM": {
+    address: "天久保3丁目2–8 ウッディライフつくば 1F",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJj4WQJvgLImARpNuHpfU-r8k",
+    lat: 36.1037147,
+    lng: 140.0992588,
+  },
+  SugayaCoffee: {
+    address: "春日4丁目24–19 ハイツオリ–ブ",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJEUNDnvcLImARrTlrUgTPIuI",
+    lat: 36.1023213,
+    lng: 140.0984748,
+  },
+  "カフェ クレマチス": {
+    address: "春日4丁目5–7 学生会館 Uni E’meal つくば春日 107-1",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJ____v4kLImARbVVAsyOsK7Q",
+    lat: 36.0964869,
+    lng: 140.0969143,
+  },
+  "N's cafe": {
+    address: "天久保3丁目13–3 高野テナント 103",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJJRrI4JYNImARLq3Jp9uJXuQ",
+    lat: 36.1049398,
+    lng: 140.1062848,
+  },
+  "千年一日珈琲焙煎所 Cafe": {
+    address: "天久保3丁目21–3 星谷ビル 1F/G",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJe0Jb1RYNImARpyfSaD-Qpfg",
+    lat: 36.1054556,
+    lng: 140.108596,
+  },
+  "Rainbow cafe @つくば店": {
+    address: "春日3丁目12–2",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJkWzl-XgLImARzqW05EkPmPY",
+    lat: 36.0936376,
+    lng: 140.0982068,
+  },
+  "コナズ珈琲 @つくば店": {
+    address: "研究学園3丁目1–3",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJOfJuD8cLImARVVQUgT-bkL4",
+    lat: 36.0855276,
+    lng: 140.0741116,
+  },
+  スープファクトリー: {
+    address: "天王台1丁目1–1 第一エリア 1Ａ棟 2F",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJ82iAGQEMImARrSgb7G2u1xU",
+    lat: 36.1082884,
+    lng: 140.1029553,
+  },
+  "カラオケレインボー @つくば店": {
+    address: "竹園1丁目9–2 デイズタウンB1F",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJX8zWNokMImARFImaWD0BnMc",
+    lat: 36.07793789999999,
+    lng: 140.1151269,
+  },
 } as const satisfies Record<string, OpenedRestaurant>;
 
 export const closedRestaurants = {
-  RanRan: { closed: true },
-  "バーガーズカフェWikiwiki: ハンバーガ": { closed: true },
-  "エルトリート @つくば学園店: メキシコ料理": { closed: true },
+  RanRan: {
+    address: "春日4丁目4–18",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJ42Q69fQLImARph7T1APqHro",
+    lat: 36.0956862,
+    lng: 140.0971945,
+    closed: true,
+  },
+  "バーガーズカフェWikiwiki: ハンバーガ": {
+    address: "天久保1丁目10–4 ジョイプラザ天久保 2号室",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJ3abwjAYNImARHSXqJYfj6Ys",
+    lat: 36.0943109,
+    lng: 140.1074786,
+    closed: true,
+  },
+  "エルトリート @つくば学園店: メキシコ料理": {
+    address: "天久保2丁目16–4",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJwV6HnHIMImARJm-14OiBsqg",
+    lat: 36.09738890000001,
+    lng: 140.1109469,
+    closed: true,
+  },
   コスモス: { closed: true },
-  "ビッグエコー @つくば天久保店（モナコ店）": { closed: true },
+  "ビッグエコー @つくば天久保店（モナコ店）": {
+    address: "天久保1丁目14–1",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJ4_uv1nEMImARnZNS1xgt4-s",
+    lat: 36.0924929,
+    lng: 140.1108539,
+    closed: true,
+  },
   "麺匠 伊助": { closed: true },
-  俺の生きる道W: { closed: true },
-  "和の国 KAGUYA RAMEN": { closed: true },
-  "大戸屋 @BiViつくば店": { closed: true },
-  "居酒屋 新世界": { closed: true },
-  春日食堂: { closed: true },
-  松屋食堂: { closed: true },
+  俺の生きる道W: {
+    address: "天久保3丁目8–1",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJcS0bonINImARGnq9w7kvqE0",
+    lat: 36.1047582,
+    lng: 140.1037979,
+    closed: true,
+  },
+  "和の国 KAGUYA RAMEN": {
+    address: "天久保2丁目10–3",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJIW45-p8NImARbl49YYPo5fw",
+    lat: 36.0974953,
+    lng: 140.1081599,
+    closed: true,
+  },
+  "大戸屋 @BiViつくば店": {
+    address: "吾妻1丁目8–10 BiViつくば 3F",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJkypqmWIMImARGM7VTPpnlEM",
+    lat: 36.0817105,
+    lng: 140.1127602,
+    closed: true,
+  },
+  "居酒屋 新世界": {
+    address: "天久保2丁目11–10",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJYyEwCUsNImARRT1Z-wI3PvA",
+    lat: 36.0967426,
+    lng: 140.1098986,
+    closed: true,
+  },
+  春日食堂: {
+    address: "春日1丁目2",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJh07IYGUNImAR_07Yw71h_nw",
+    lat: 36.0869057,
+    lng: 140.1070071,
+    closed: true,
+  },
+  松屋食堂: {
+    address: "天久保1丁目6–15",
+    lat: 36.0907262,
+    lng: 140.1082688,
+    closed: true,
+  },
   盛清六: {
     address: "天久保2丁目9–2 リッチモンド 2番街 104",
     mapsUrl:
@@ -1430,15 +1830,74 @@ export const closedRestaurants = {
     lng: 140.1084146,
     closed: true,
   },
-  茶の木村園: { closed: true },
-  "貝出汁 まぜそば 虎巴徠": { closed: true },
-  銀のしずく: { closed: true },
-  "鬼屋 @つくば本店": { closed: true },
-  "麺 The Tokyo": { closed: true },
-  "麺屋 必道": { closed: true },
-  麺屋とどろき: { closed: true },
-  "めしや 益さん": { closed: true },
-  れいちゃんの食小屋: { closed: true },
+  茶の木村園: {
+    address: "春日4丁目7–9",
+    lat: 36.078589,
+    lng: 140.0812065,
+    closed: true,
+  },
+  "貝出汁 まぜそば 虎巴徠": {
+    address: "天久保3丁目15–4 丸三ビル 1-D",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJFabcRigNImARRyUPq6O5CnA",
+    lat: 36.1073763,
+    lng: 140.1057378,
+    closed: true,
+  },
+  銀のしずく: {
+    address: "天久保2丁目6–1",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJiWxmA1ENImARQ92kZyvFIKQ",
+    lat: 36.0980348,
+    lng: 140.1060999,
+    closed: true,
+  },
+  "鬼屋 @つくば本店": {
+    address: "天久保1丁目8–6",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJtSg-KZoNImARNbcd34qstt8",
+    lat: 36.0922271,
+    lng: 140.10862,
+    closed: true,
+  },
+  "麺 the Tokyo": {
+    address: "天久保3丁目15–4 丸三大学中央商店街",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJp66SdAYMImARJCMF9Fn8Wxc",
+    lat: 36.1073549,
+    lng: 140.1057609,
+    closed: true,
+  },
+  "麺屋 必道": {
+    address: "柴崎1050–1",
+    lat: 36.1091866,
+    lng: 140.1195199,
+    closed: true,
+  },
+  麺屋とどろき: {
+    address: "花畑3丁目12–8 パルネット大竹 麺屋とどろき",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJo9ciMkgJImARUU5BzNDr17Y",
+    lat: 36.1278186,
+    lng: 140.0929752,
+    closed: true,
+  },
+  "めしや 益さん": {
+    address: "天久保3丁目14–11 ヴィレッジ コスモ 102号",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJ-cSHFwYMImAROG69hRasbNM",
+    lat: 36.1062897,
+    lng: 140.1047296,
+    closed: true,
+  },
+  れいちゃんの食小屋: {
+    address: "天久保3丁目10–7",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJ24G7QAANImARQSdkhtREgKY",
+    lat: 36.1066629,
+    lng: 140.1033663,
+    closed: true,
+  },
   "活龍 @竹園店": {
     address: "竹園1丁目9–7",
     closed: true,
@@ -1451,63 +1910,17 @@ export const closedRestaurants = {
     lng: 140.0859947,
     closed: true,
   },
-  アヤカリ亭: { closed: true },
+  アヤカリ亭: {
+    address: "柴崎1050–1",
+    mapsUrl:
+      "https://www.google.com/maps/place/?q=place_id:ChIJsY_UOe4NImAR5mCC1ARtsFc",
+    lat: 36.1090929,
+    lng: 140.1195632,
+    closed: true,
+  },
 } as const satisfies Record<string, ClosedRestaurant>;
-
-export const unknownRestaurants = {
-  "俺の生きる道 @つくば店": {},
-  "横浜家系ラーメン 魂心家 @つくば店": {},
-  "煮干中華ソバ イチカワ": {},
-  "中華そば 騰匠俐": {},
-  中華そばビート: {},
-  "味噌のジョー @つくば本店 ": {},
-  "ゆきむら亭 つくば西店": {},
-  "麺処 明り": {},
-  屋台ラーメン桜: {},
-  麺や小五郎: {},
-  ららららーめんや: {},
-  らーめんICHI: {},
-  "麺屋 湯火": {},
-  豚飯坊屋: {},
-  "かつ太郎本店 つくば学園店": {},
-  "おそば 増田屋": {},
-  "つくば蕎麦物語 一成": {},
-  桃ちゃん弁当: {},
-  とんかつ弁当かつ大: {},
-  おふくろさん弁当: {},
-  "本格韓国料理 BabSang（バブサン）: 韓国料理": {},
-  "Spice curry TRIGGER": {},
-  ストリートス: {},
-  "kalak（カラク）": {},
-  "韓国料理 炭火焼肉 ハンアリ": {},
-  "焼肉 平城苑 つくば学園店": {},
-  "串かつ でんがな BiViつくば店": {},
-  "naked bar": {},
-  "東京バル GardenTerrace": {},
-  "しゃぶ葉 つくば店": {},
-  "びっくりドンキー @つくば中央店": {},
-  ばんどう太郎つくば学園店: {},
-  "和食さと つくば店": {},
-  "モスバーガー @つくば中央店": {},
-  "ケンタッキーフライドチキン @筑波学園店": {},
-  "カレーハウス CoCo壱番屋 @つくば桜店": {},
-  "moi!kka（モイッカ）": {},
-  "スターバックスコーヒー @筑波大学中央図書館店": {},
-  "スぺシャルティコーヒー豆専門店 トライブ": {},
-  "自家焙煎珈琲 まめぽっと": {},
-  "SORA CAFE & COOKING ROOM": {},
-  SugayaCoffee: {},
-  "カフェ クレマチス": {},
-  "N's cafe": {},
-  "千年一日珈琲焙煎所 Cafe": {},
-  "Rainbow cafe @つくば店": {},
-  "コナズ珈琲 つくば店": {},
-  スープファクトリー: {},
-  "カラオケレインボー @つくば店": {},
-} as const satisfies Record<string, UnknownRestaurant>;
 
 export const restaurantContents = {
   ...openedRestaurants,
   ...closedRestaurants,
-  ...unknownRestaurants,
 };
