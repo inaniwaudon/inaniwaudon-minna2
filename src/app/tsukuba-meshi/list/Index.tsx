@@ -54,7 +54,7 @@ const RandomButton = styled.button`
   cursor: pointer;
   position: fixed;
   right: 24px;
-  bottom: calc(24px + env(safe-area-inset-bottom));
+  bottom: 24px;
 
   &:hover {
     opacity: 0.8;
@@ -366,6 +366,7 @@ const Index = () => {
                   : restaurant.unvisited
                     ? "（未遂）"
                     : "";
+                const todayHours = getTodayHours(restaurant.name);
                 return (
                   <CircleMarker
                     key={restaurant.name}
@@ -388,10 +389,22 @@ const Index = () => {
                           style={{
                             fontSize: "12px",
                             color: "#666",
-                            marginTop: "6spx",
+                            marginTop: "6px",
                           }}
                         >
                           {content.address}
+                        </div>
+                      )}
+                      {todayHours && (
+                        <div
+                          style={{
+                            fontSize: "12px",
+                            color:
+                              todayHours === "本日休み" ? "#e08020" : "#888",
+                            marginTop: "4px",
+                          }}
+                        >
+                          {todayHours}
                         </div>
                       )}
                       {"placeId" in content && content.placeId && (
