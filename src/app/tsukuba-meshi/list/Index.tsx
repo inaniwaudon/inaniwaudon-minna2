@@ -75,6 +75,15 @@ const FilterSection = styled.div`
   gap: 12px;
 `;
 
+const SearchInput = styled.input`
+  width: 100%;
+  padding: 8px 12px;
+  border: 1.5px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  box-sizing: border-box;
+`;
+
 const FilterLabel = styled.div`
   color: #666;
   font-size: 14px;
@@ -249,8 +258,17 @@ const RestaurantRow = ({ restaurant }: { restaurant: RestaurantEntry }) => {
 
 const Index = () => {
   const [view, setView] = useState<"list" | "map">("list");
+  const [searchQuery, setSearchQuery] = useState("");
   const [selectedGenres, setSelectedGenres] = useState<Set<string>>(new Set());
   const [selectedAreas, setSelectedAreas] = useState<Set<string>>(new Set());
+
+  const matchesSearch = (restaurant: RestaurantEntry): boolean => {
+    if (!searchQuery) {
+      return true;
+    }
+    const query = searchQuery.toLowerCase();
+    return restaurant.name.toLowerCase().includes(query);
+  };
 
   const matchesArea = (restaurant: RestaurantEntry): boolean => {
     if (selectedAreas.size === 0) {
@@ -293,13 +311,13 @@ const Index = () => {
     .map((g) => ({
       ...g,
       restaurants: g.restaurants?.filter(
-        (r) => matchesArea(r) && matchesStatus(r),
+        (r) => matchesSearch(r) && matchesArea(r) && matchesStatus(r),
       ),
       subgenres: g.subgenres
         ?.map((sg) => ({
           ...sg,
           restaurants: sg.restaurants.filter(
-            (r) => matchesArea(r) && matchesStatus(r),
+            (r) => matchesSearch(r) && matchesArea(r) && matchesStatus(r),
           ),
         }))
         .filter((sg) => sg.restaurants.length > 0),
@@ -347,6 +365,12 @@ const Index = () => {
           は特におすすめのお店，（未遂）はまだ行ったことのないお店，（閉店）は閉店したお店を示します．
         </p>
         <FilterSection>
+          <SearchInput
+            type="text"
+            placeholder="店名で検索"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
           <div>
             <FilterLabel>ジャンル</FilterLabel>
             <FilterGenre>

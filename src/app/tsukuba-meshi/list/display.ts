@@ -319,6 +319,7 @@ export const genres: Genre[] = [
           { name: "アポロ" },
           { name: "焼きもの家 慶" },
           { name: "茨城地のもの わらやき料理 たたきの一九 @つくば店" },
+          { name: "さん吉 @つくば店" },
           { name: "びすとろ椿々 cin‐cin" },
           { name: "おもてなし" },
           { name: "焼鳥ふくろう" },

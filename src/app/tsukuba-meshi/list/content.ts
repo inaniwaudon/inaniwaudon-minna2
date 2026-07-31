@@ -1217,12 +1217,6 @@ export const openedRestaurants = {
     lat: 36.098365,
     lng: 140.1083905,
   },
-  "中華そば 騰匠俐": {
-    address: "桜2丁目15–3",
-    placeId: "ChIJq1h3CAANImARapf2bQjjpXk",
-    lat: 36.1115261,
-    lng: 140.1106368,
-  },
   中華そばビート: {
     address: "竹園1丁目9–7 林ビル 102",
     placeId: "ChIJjb6KewANImARYIcvgjETLL0",
@@ -1493,6 +1487,12 @@ export const openedRestaurants = {
     lat: 36.07793789999999,
     lng: 140.1151269,
   },
+  "さん吉 @つくば店": {
+    address: "天久保2丁目2–18",
+    placeId: "ChIJm9Eyu3MMImARZKwCAhO9EfA",
+    lat: 36.0948313,
+    lng: 140.105259,
+  },
 } as const satisfies Record<string, OpenedRestaurant>;
 
 export const closedRestaurants = {
@@ -1666,6 +1666,13 @@ export const closedRestaurants = {
     placeId: "ChIJsY_UOe4NImAR5mCC1ARtsFc",
     lat: 36.1090929,
     lng: 140.1195632,
+    closed: true,
+  },
+  "中華そば 騰匠俐": {
+    address: "桜2丁目15–3",
+    placeId: "ChIJq1h3CAANImARapf2bQjjpXk",
+    lat: 36.1115261,
+    lng: 140.1106368,
     closed: true,
   },
 } as const satisfies Record<string, ClosedRestaurant>;
