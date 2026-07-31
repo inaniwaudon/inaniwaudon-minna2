@@ -235,21 +235,21 @@ export const useRestaurantFilter = () => {
     if (selectedTimeFilter === "現在") {
       return opening.periods.some((p) => isInPeriod(p.from, p.to, nowMin));
     }
-    if (selectedTimeFilter === "30分後") {
+    if (selectedTimeFilter === "現在–30分後") {
       return opening.periods.some(
         (p) =>
           isInPeriod(p.from, p.to, nowMin) &&
           minutesUntilClose(p.to, nowMin) >= 30,
       );
     }
-    if (selectedTimeFilter === "1時間後") {
+    if (selectedTimeFilter === "現在–1時間後") {
       return opening.periods.some(
         (p) =>
           isInPeriod(p.from, p.to, nowMin) &&
           minutesUntilClose(p.to, nowMin) >= 60,
       );
     }
-    if (selectedTimeFilter === "2時間後") {
+    if (selectedTimeFilter === "現在–2時間後") {
       return opening.periods.some(
         (p) =>
           isInPeriod(p.from, p.to, nowMin) &&
