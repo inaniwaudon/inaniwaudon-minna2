@@ -36,6 +36,31 @@ const Index = () => {
 
         <Anchor href="/tsukuba-meshi/list">つくば飲食店リスト・地図</Anchor>
 
+        <H2>2025・2026 年度版</H2>
+        <p>画像クリックで拡大します</p>
+        <ImageWrapper>
+          <ImageAnchor href="/docs/tsukuba-meshi-spring2025.webp">
+            <Image src="/docs/tsukuba-meshi-spring2025.webp" />
+          </ImageAnchor>
+          <ImageAnchor href="/docs/tsukuba-meshi-spring2026.webp">
+            <Image src="/docs/tsukuba-meshi-spring2026.webp" />
+          </ImageAnchor>
+        </ImageWrapper>
+        <CustomList>
+          <li>
+            研究室周辺おすすめ飲食店（2025）：
+            <Anchor href="/docs/tsukuba-meshi-spring2025.pdf">
+              PDF 版（1.2 MB）
+            </Anchor>
+          </li>
+          <li>
+            つくばおすすめ飲み屋 13選（2026）：
+            <Anchor href="/docs/tsukuba-meshi-spring2026.pdf">
+              PDF 版（0.9 MB）
+            </Anchor>
+          </li>
+        </CustomList>
+
         <H2>2024 年度版</H2>
         <p>画像クリックで拡大します</p>
         <ImageWrapper>
@@ -78,6 +103,12 @@ const Index = () => {
         </CustomList>
 
         <H2>2022 年度版</H2>
+        <p>画像クリックで拡大します</p>
+        <ImageWrapper>
+          <ImageAnchor href="/docs/tsukuba-ramen2022.webp">
+            <Image src="/docs/tsukuba-ramen2022.webp" />
+          </ImageAnchor>
+        </ImageWrapper>
         <CustomList>
           <li>
             <Anchor href="/docs/tsukuba-ramen2022.pdf">
