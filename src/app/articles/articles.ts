@@ -654,7 +654,7 @@ const articleOthersLinks: ArticleLink[] = [
   },
   {
     href: "https://www.marubun-zaidan.jp/r08_wada.html",
-    title: "令和8年度 国際交流助成受領者による国際会議参加レポート",
+    title: "令和 8 年度 国際交流助成受領者による国際会議参加レポート",
     date: "2026/05/19",
     description: "一般財団法人 丸文財団",
     tags: ["random"],
