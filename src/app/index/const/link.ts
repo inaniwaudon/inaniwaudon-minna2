@@ -1,7 +1,5 @@
 import gitHubIcon from "@/assets/icons/github.svg";
 import hatenablogIcon from "@/assets/icons/hatenablog.svg";
-import keybaseIcon from "@/assets/icons/keybase.svg";
-import misskeyIcon from "@/assets/icons/misskey.webp";
 import noteIcon from "@/assets/icons/note.svg";
 import twitterIcon from "@/assets/icons/twitter.svg";
 import zennIcon from "@/assets/icons/zenn.svg";
@@ -59,16 +57,6 @@ export const links: Link[] = [
     },
   },
   {
-    platform: "Misskey",
-    name: "@inaniwaudon@misskey.io",
-    url: "https://misskey.io/@inaniwaudon",
-    color: "#55c500",
-    icon: {
-      url: misskeyIcon,
-      scale: 1.6,
-    },
-  },
-  {
     platform: "note",
     name: "いなにわうどん",
     url: "https://note.com/soudakyoto_ikou",
@@ -76,16 +64,6 @@ export const links: Link[] = [
     icon: {
       url: noteIcon,
       scale: 1.7,
-    },
-  },
-  {
-    platform: "Keybase",
-    name: "inaniwaudon",
-    url: "https://keybase.io/inaniwaudon",
-    color: "#33a0ff",
-    icon: {
-      url: keybaseIcon,
-      scale: 1.1,
     },
   },
 ];
