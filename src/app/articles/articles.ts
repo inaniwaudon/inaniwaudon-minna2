@@ -182,6 +182,12 @@ const articleHatenaLinks: ArticleLink[] = [
     date: "2026/01/03",
     tags: ["random"],
   },
+  {
+    href: "https://soudakyoto-ikou.hatenadiary.jp/entry/20260917/1789648924",
+    title: "未踏を越えて",
+    date: "2026/09/17",
+    tags: ["random", "hongoshi"],
+  },
 ];
 
 const articleZennLinks: ArticleLink[] = [
@@ -395,6 +401,13 @@ const articleZennLinks: ArticleLink[] = [
       "LaTeX で「どの単語を削ればページ内に収まるか」を可視化するスクリプト",
     date: "2025/12/17",
     tags: ["tech"],
+  },
+  {
+    href: "https://zenn.dev/inaniwaudon/articles/62f1def4bad627",
+    title:
+      "TypeScript ライブラリとして動作する組版エンジン minitype を公開しました",
+    date: "2026/08/30",
+    tags: ["tech", "hongoshi"],
   },
 ];
 
@@ -638,6 +651,13 @@ const articleOthersLinks: ArticleLink[] = [
     date: "2026/04/13",
     description: "CHI EA '26",
     tags: ["tech"],
+  },
+  {
+    href: "https://www.marubun-zaidan.jp/r08_wada.html",
+    title: "令和8年度 国際交流助成受領者による国際会議参加レポート",
+    date: "2026/05/19",
+    description: "一般財団法人 丸文財団",
+    tags: ["random"],
   },
   {
     href: "/articles/opinion2",
